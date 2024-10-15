@@ -14,13 +14,24 @@ class Animal(ABC):
             self.__numero_chip = numero_chip
         else:
             print('Tipo inválido')
+        
+        if isinstance(nome, str):
+            self.__nome = nome
+        else:
+            print('Tipo inválido')
+
+        if isinstance(raca, str):
+            self.__raca = raca
+        else:
+            print('Tipo inválido')
     
     '''
     
     @return 
     '''
     def vacinar(self) -> Vacinacao:
-        pass
+        nova_vacinacao = Vacinacao()
+        return nova_vacinacao
 
     '''
     
@@ -28,5 +39,44 @@ class Animal(ABC):
     '''
     @property
     @abstractmethod
-    def personagem(self) -> Personagem:
-        pass
+    def numero_chip(self):
+        return self.__numero_chip
+    
+    @numero_chip.setter
+    def numero_chip(self, numero_chip: int):
+        if isinstance(numero_chip, int):
+            self.__numero_chip = numero_chip
+        else:
+            print("Valor inválido. O valor deve ser um int")
+
+    '''
+    
+    @return
+    '''
+    @property
+    @abstractmethod
+    def nome(self):
+        return self.__nome
+    
+    @nome.setter
+    def nome(self, nome: str):
+        if isinstance(nome, str):
+            self.__nome = nome
+        else:
+            print("Valor inválido. O valor deve ser um str")
+    
+    '''
+    
+    @return
+    '''
+    @property
+    @abstractmethod
+    def raca(self):
+        return self.__raca
+    
+    @raca.setter
+    def raca(self, raca: str):
+        if isinstance(raca, str):
+            self.__raca = raca
+        else:
+            print("Valor inválido. O valor deve ser um str")
