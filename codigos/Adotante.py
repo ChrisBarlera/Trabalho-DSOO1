@@ -1,10 +1,10 @@
-from datetime import date
+from datetime import date as Date
 from Pessoa import Pessoa
 from Habitacao import Habitacao
 
 
 class Adotante(Pessoa):
-    def __init__(self, cpf: int, nome: str, data_nasc: date, endereco: str,
+    def __init__(self, cpf: int, nome: str, data_nasc: Date, endereco: str,
                  habitacao: Habitacao, possui_animais: bool):
         super().__init__(cpf, nome, data_nasc, endereco)
         self.__habitacao = None
@@ -42,3 +42,7 @@ class Adotante(Pessoa):
             self.possui_animais = possui_animais
         else:
             print("Valor inválido. O valor deve ser um bool")
+
+    def calcula_idade(self):
+        hoje = Date.today()
+        return (hoje - self.__data_nasc).days // 365
