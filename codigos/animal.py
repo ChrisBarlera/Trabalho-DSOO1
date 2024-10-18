@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
-from vacinacao import Vacinacao
+from Vacinacao import Vacinacao
+from datetime import date as Date
+
 
 class Animal(ABC):
     
@@ -8,6 +10,7 @@ class Animal(ABC):
         self.__numero_chip = None
         self.__nome = None
         self.__raca = None
+        self.__vacinacoes = [] # type: list[Vacinacao]
 
         ### Testando tipos das variáveis
         if isinstance(numero_chip, int):
@@ -24,21 +27,12 @@ class Animal(ABC):
             self.__raca = raca
         else:
             print('Tipo inválido')
-    
-    '''
-    
-    @return 
-    '''
-    def vacinar(self) -> Vacinacao:
-        nova_vacinacao = Vacinacao()
-        return nova_vacinacao
 
     '''
     
     @return
     '''
     @property
-    @abstractmethod
     def numero_chip(self):
         return self.__numero_chip
     
@@ -54,7 +48,6 @@ class Animal(ABC):
     @return
     '''
     @property
-    @abstractmethod
     def nome(self):
         return self.__nome
     
@@ -70,7 +63,6 @@ class Animal(ABC):
     @return
     '''
     @property
-    @abstractmethod
     def raca(self):
         return self.__raca
     
@@ -80,3 +72,24 @@ class Animal(ABC):
             self.__raca = raca
         else:
             print("Valor inválido. O valor deve ser um str")
+
+    '''
+    
+    @return
+    '''
+    @property
+    def vacinacoes(self):
+        return self.__vacinacoes
+
+    '''
+
+    @return 
+    '''
+    def vacinar(self, data: Date, vacina: str) -> Vacinacao:
+        if isinstance(data, Date) and isinstance(vacina, str):
+            nova_vacinacao = Vacinacao(data, self, vacina)
+            self.__vacinacoes.append(nova_vacinacao)
+            return nova_vacinacao
+        else:
+            print('Tipo inválido')
+            return None
