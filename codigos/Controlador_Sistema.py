@@ -1,15 +1,12 @@
-from Adocao import Adocao
-from Doacao import Doacao
-from Animal import Animal
-from Pessoa import Pessoa
+from Controlador_Animal import Controlador_Animal
 
 
 class Controlador_Sistema:
     def __init__(self) -> None:
-        self.__adocoes = [] # type: list[Adocao]
-        self.__doacoes = [] # type: list[Doacao]
-        self.__animais = [] # type: list[Animal]
-        self.__pessoas = [] # type: list[Pessoa]
+        self.__adocoes = [] # type: ignore
+        self.__doacoes = [] # type: ignore
+        self.__pessoas = [] # type: ignore
+        self.__controlador_animais = Controlador_Animal(self)
     
     def cadastrar_animal(self):
         pass

@@ -1,6 +1,7 @@
 from datetime import date as Date
 from Pessoa import Pessoa
 from Habitacao import Habitacao
+from Adocao import Adocao
 
 
 class Adotante(Pessoa):
@@ -45,4 +46,4 @@ class Adotante(Pessoa):
 
     def calcula_idade(self):
         hoje = Date.today()
-        return (hoje - self.__data_nasc).days // 365
+        return (hoje - self.__data_nasc).days // 365 # type: ignore
