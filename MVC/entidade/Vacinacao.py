@@ -29,10 +29,6 @@ class Vacinacao:
         else:
             print('Tipo inválido')
 
-    '''
-    
-    @return
-    '''
     @property
     def data(self):
         return self.__data
@@ -44,10 +40,6 @@ class Vacinacao:
         else:
             print("Valor inválido. O valor deve ser um Date")
 
-    '''
-    
-    @return
-    '''
     @property
     def animal(self):
         return self.__animal
@@ -59,10 +51,6 @@ class Vacinacao:
     #     else:
     #         print("Valor inválido. O valor deve ser um Animal")
 
-    '''
-    
-    @return
-    '''
     @property
     def vacina(self):
         return self.__vacina

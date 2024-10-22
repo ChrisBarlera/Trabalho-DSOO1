@@ -1,10 +1,10 @@
 from abc import ABC, abstractmethod
-from Vacinacao import Vacinacao
+from Vacinacao import Vacina, Vacinacao
 from datetime import date as Date
 
 
 class Animal(ABC):
-    
+
     @abstractmethod
     def __init__(self, numero_chip: int, nome: str, raca: str):
         self.__numero_chip = None
@@ -28,10 +28,6 @@ class Animal(ABC):
         else:
             print('Tipo inválido')
 
-    '''
-    
-    @return
-    '''
     @property
     def numero_chip(self):
         return self.__numero_chip
@@ -43,10 +39,6 @@ class Animal(ABC):
         else:
             print("Valor inválido. O valor deve ser um int")
 
-    '''
-    
-    @return
-    '''
     @property
     def nome(self):
         return self.__nome
@@ -58,10 +50,6 @@ class Animal(ABC):
         else:
             print("Valor inválido. O valor deve ser um str")
     
-    '''
-    
-    @return
-    '''
     @property
     def raca(self):
         return self.__raca
@@ -73,20 +61,12 @@ class Animal(ABC):
         else:
             print("Valor inválido. O valor deve ser um str")
 
-    '''
-    
-    @return
-    '''
     @property
     def vacinacoes(self):
         return self.__vacinacoes
 
-    '''
-
-    @return 
-    '''
-    def vacinar(self, data: Date, vacina: str) -> Vacinacao:
-        if isinstance(data, Date) and isinstance(vacina, str):
+    def vacinar(self, data: Date, vacina: Vacina) -> Vacinacao:
+        if isinstance(data, Date) and isinstance(vacina, Vacina):
             nova_vacinacao = Vacinacao(data, self, vacina)
             self.__vacinacoes.append(nova_vacinacao)
             return nova_vacinacao

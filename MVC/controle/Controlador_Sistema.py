@@ -1,4 +1,4 @@
-from Controlador_Animal import Controlador_Animal
+from MVC.controle.Controlador_Animal import Controlador_Animal
 
 
 class Controlador_Sistema:
@@ -8,6 +8,13 @@ class Controlador_Sistema:
         self.__pessoas = [] # type: ignore
         self.__controlador_animais = Controlador_Animal(self)
     
+    def inicializa_sistema(self):
+        self.abre_tela()
+
+    def abre_tela(self):
+        lista_opcoes = {1: self.cadastra_livros, 2: self.cadastra_amigos, 3: self.cadastra_emprestimos,
+                        0: self.encerra_sistema}
+
     def cadastrar_animal(self):
         pass
 
