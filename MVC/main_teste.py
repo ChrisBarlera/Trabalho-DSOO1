@@ -1,8 +1,8 @@
 from datetime import date as Date
-from MVC.entidade.Cachorro import Cachorro, Tamanho_Cachorro
-from MVC.entidade.Gato import Gato
-from MVC.controle.Controlador_Sistema import Controlador_Sistema
-from MVC.entidade.Vacinacao import Vacina
+from entidade.Cachorro import Cachorro, Tamanho_Cachorro
+from entidade.Gato import Gato
+from controle.Controlador_Sistema import Controlador_Sistema
+from entidade.Vacinacao import Vacina
 
 data_vac = Date(2024,12,1)
 

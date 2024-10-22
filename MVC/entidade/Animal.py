@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from Vacinacao import Vacina, Vacinacao
+from entidade.Vacinacao import Vacina, Vacinacao
 from datetime import date as Date
 
 

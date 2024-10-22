@@ -1,4 +1,4 @@
-from Animal import Animal
+from entidade.Animal import Animal
 
 
 class Gato(Animal):

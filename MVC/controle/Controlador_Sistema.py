@@ -1,4 +1,4 @@
-from MVC.controle.Controlador_Animal import Controlador_Animal
+from controle.Controlador_Animal import Controlador_Animal
 
 
 class Controlador_Sistema:
