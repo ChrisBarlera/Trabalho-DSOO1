@@ -1,10 +1,14 @@
 from datetime import date as Date
-# from Animal import Animal
+from enum import Enum
 
+class Vacina(Enum):
+    RAIVA = 'raiva',
+    LEPTOSPIROSE = 'leptospirose',
+    HEPATITE_INFECCIOSA = 'hepatite infecciosa'
 
 class Vacinacao:
     # def __init__(self, data: Date, animal: Animal, vacina: str) -> None:
-    def __init__(self, data: Date, animal, vacina: str) -> None:
+    def __init__(self, data: Date, animal, vacina: Vacina) -> None:
         self.__data = None
         self.__animal = animal
         self.__vacina = None
@@ -20,7 +24,7 @@ class Vacinacao:
         # else:
         #     print('Tipo inválido')
 
-        if isinstance(vacina, str):
+        if isinstance(vacina, Vacina):
             self.__vacina = vacina
         else:
             print('Tipo inválido')
@@ -64,8 +68,8 @@ class Vacinacao:
         return self.__vacina
     
     @vacina.setter
-    def vacina(self, vacina: str):
-        if isinstance(vacina, str):
+    def vacina(self, vacina: Vacina):
+        if isinstance(vacina, Vacina):
             self.__vacina = vacina
         else:
             print("Valor inválido. O valor deve ser um str")
