@@ -11,7 +11,13 @@ class ControladorAnimal:
         self.__tela_animal = TelaAnimal()
 
     def incluir_animal(self):
-        dados_animal = self.__tela_animal.pega_dados_animal()
+        dados_animal = self.__tela_animal.pega_dados_animal() # Precisa alterar
+        if len(dados_animal) == 4:
+            pass
+            # cachorro
+        else:
+            # gato
+            self.__controlador_gato.incluir_gato()
     
     def alterar_animal(self):
         pass

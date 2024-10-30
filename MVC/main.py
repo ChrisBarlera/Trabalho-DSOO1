@@ -1,6 +1,5 @@
-from datetime import date as Date
-from MVC.controle.ControladorSistema import Controlador_Sistema
+from controle.ControladorSistema import ControladorSistema
 
 
 if __name__ == "__main__":
-    Controlador_Sistema().inicializa_sistema()
+    ControladorSistema().inicializa_sistema()
