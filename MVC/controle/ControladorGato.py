@@ -1,20 +1,26 @@
 from limite.TelaGato import TelaGato
+from entidade.Gato import Gato
 
 
 class ControladorGato:
 
     def __init__(self, controlador_sistema) -> None:
         self.__controlador_sistema = controlador_sistema
-        self.__animais = [] # type: ignore
+        self.__gatos = [] # type: ignore
         self.__tela_gato = TelaGato()
 
     def incluir_gato(self):
         dados_gato = self.__tela_gato.pega_dados_gato()
+        novo_gato = Gato(dados_gato["numero_chip"], 
+                         dados_gato['nome'],
+                         dados_gato['raca'])
+        self.__gatos.append(novo_gato)
+        return novo_gato
     
     def alterar_gato(self):
         pass
 
-    def lista_gato(self):
+    def lista_gatos(self):
         pass
 
     def excluir_gato(self):

@@ -1,18 +1,17 @@
 class TelaGato:
     def tela_opcoes(self):
-        print("-------- GATO ----------")
-        print("Escolha a opcao")
+        print("\n-------- GATO ----------")
         print("1 - Incluir gato")
         print("2 - Alterar gato")
         print("3 - Listar Animais")
         print("4 - Excluir gato")
         print("0 - Retornar")
         
-        opcao = int(input("Escolha a opcao: "))
+        opcao = int(input("Escolha a opção: "))
         return opcao
     
     def pega_dados_gato(self):
-        print("-------- DADOS GATO ----------")
+        print("\n-------- DADOS GATO ----------")
         numero_chip = int(input("Número do chip: "))
         nome = input("Nome: ")
         raca = input("Raça: ")
