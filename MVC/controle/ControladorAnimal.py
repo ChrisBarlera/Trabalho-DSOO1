@@ -47,16 +47,3 @@ class ControladorAnimal:
 
     def excluir_animal(self):
         pass
-
-    def abre_tela(self):
-        lista_opcoes = {1: self.incluir_animal,
-                        2: self.alterar_animal,
-                        3: self.lista_animais,
-                        4: self.excluir_animal,
-                        0: self.retornar}
-
-        while True:
-            lista_opcoes[self.__tela_animal.tela_opcoes()]()
-    
-    def retornar(self):
-        self.__controlador_sistema.abre_tela()

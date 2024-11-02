@@ -19,7 +19,8 @@ class TelaAnimal:
 
         if tipo == 2: # Tipo Cachorro
             tamanho = input("Tamanho: ")
-            return {"numero_chip": numero_chip, "nome": nome, "raca": raca, "tamanho":tamanho}
+            return {"numero_chip": numero_chip,
+                    "nome": nome, "raca": raca, "tamanho": tamanho}
         else:
             return {"numero_chip": numero_chip, "nome": nome, "raca": raca}
     
@@ -30,11 +31,6 @@ class TelaAnimal:
 
         opcao = int(input("Escolha a opção: "))
         return opcao
-    
-    def mostra_animal(self, dados_animal):
-        print("TITULO DO animal: ", dados_animal["titulo"])
-        print("CODIGO DO animal: ", dados_animal["codigo"])
-        print("\n")
 
     def decide_mostra_tipo(self):
         print("\n-------- TIPO ANIMAL ----------")

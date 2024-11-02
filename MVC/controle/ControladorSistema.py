@@ -1,4 +1,5 @@
 from controle.ControladorAnimal import ControladorAnimal
+from controle.ControladorPessoa import ControladorPessoa
 from limite.TelaSistema import TelaSistema
 
 
@@ -9,6 +10,7 @@ class ControladorSistema:
         self.__pessoas = [] # type: ignore
         self.__tela_sistema = TelaSistema()
         self.__controlador_animais = ControladorAnimal(self)
+        self.__controlador_pessoas = ControladorPessoa(self)
     
     def inicializa_sistema(self):
         self.abre_tela()
@@ -18,10 +20,10 @@ class ControladorSistema:
 
     def abre_tela(self):
         # Precisa completar
-        lista_opcoes = {1: self.cadastrar_animal,
-                        2: self.cadastrar_pessoa,
-                        3: self.cadastrar_adocao,
-                        4: self.cadastrar_doacao,
+        lista_opcoes = {1: self.acessar_animal,
+                        2: self.acessar_pessoa,
+                        3: self.acessar_adocao,
+                        4: self.acessar_doacao,
                         0: self.encerra_sistema}
 
         while True:
@@ -29,38 +31,14 @@ class ControladorSistema:
             funcao_escolhida = lista_opcoes[opcao_escolhida]
             funcao_escolhida()
 
-    def cadastrar_animal(self):
+    def acessar_animal(self):
         self.__controlador_animais.abre_tela()
 
-    def cadastrar_pessoa(self):
+    def acessar_pessoa(self):
+        self.__controlador_pessoas.abre_tela()
+
+    def acessar_doacao(self):
         pass
 
-    def cadastrar_doacao(self):
-        pass
-
-    def cadastrar_adocao(self):
-        pass
-
-    def alterar_animal(self):
-        pass
-
-    def alterar_pessoa(self):
-        pass
-
-    def alterar_doacao(self):
-        pass
-
-    def alterar_adocao(self):
-        pass
-
-    def exluir_animal(self):
-        pass
-
-    def exluir_pessoa(self):
-        pass
-
-    def exluir_doacao(self):
-        pass
-
-    def exluir_adocao(self):
+    def acessar_adocao(self):
         pass
