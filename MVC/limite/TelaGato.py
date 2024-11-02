@@ -19,6 +19,13 @@ class TelaGato:
         return {"numero_chip": numero_chip, "nome": nome, "raca": raca}
     
     def mostra_gato(self, dados_gato):
-        print("TITULO DO GATO: ", dados_gato["titulo"])
-        print("CODIGO DO GATO: ", dados_gato["codigo"])
-        print("\n")
+        print("\nNUMERO DO GATO: ", dados_gato["numero_chip"])
+        print("NOME DO GATO: ", dados_gato["nome"])
+        print("RACA DO GATO: ", dados_gato["raca"])
+
+    def seleciona_gato(self):
+        numero = int(input("\nNumero do gato que deseja selecionar: "))
+        return numero
+    
+    def mostra_mensagem(self, msg):
+        print(msg)
