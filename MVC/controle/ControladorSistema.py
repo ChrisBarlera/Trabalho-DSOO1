@@ -18,7 +18,10 @@ class ControladorSistema:
 
     def abre_tela(self):
         # Precisa completar
-        lista_opcoes = {1: self.cadastrar_animal, 2: self.cadastrar_pessoa, 3: self.cadastrar_adocao,
+        lista_opcoes = {1: self.cadastrar_animal,
+                        2: self.cadastrar_pessoa,
+                        3: self.cadastrar_adocao,
+                        4: self.cadastrar_doacao,
                         0: self.encerra_sistema}
 
         while True:
