@@ -6,65 +6,68 @@ class ControladorDoador:
 
     def __init__(self, controlador_sistema) -> None:
         self.__controlador_sistema = controlador_sistema
-        self.__gatos = [] # type: ignore
-        self.__tela_gato = TelaDoador()
+        self.__doadores = [] # type: ignore
+        self.__tela_doador = TelaDoador()
 
-    def incluir_gato(self):
-        dados_gato = self.__tela_gato.pega_dados_gato()
-        novo_gato = Gato(dados_gato['numero_chip'], 
-                         dados_gato['nome'],
-                         dados_gato['raca'])
-        self.__gatos.append(novo_gato)
-        return novo_gato
+    def incluir_doador(self):
+        dados_doador = self.__tela_doador.pega_dados_doador()
+        novo_doador = Doador(dados_doador['cpf'], 
+                         dados_doador['nome'],
+                         dados_doador['data_nasc'],
+                         dados_doador['endereco'])
+        self.__doadores.append(novo_doador)
+        return novo_doador
     
-    def alterar_gato(self):
-        self.lista_gatos()
-        numero_gato = self.__tela_gato.seleciona_gato()
-        gato = self.pega_gato_por_numero(numero_gato)
+    def alterar_doador(self):
+        self.lista_doadores()
+        numero_doador = self.__tela_doador.seleciona_doador()
+        doador = self.pega_doador_por_cpf(numero_doador)
 
-        if gato is not None:
-            novos_dados = self.__tela_gato.pega_dados_gato()
-            gato.numero_chip = novos_dados['numero_chip']
-            gato.nome = novos_dados['nome']
-            gato.raca = novos_dados['raca']
+        if doador is not None:
+            novos_dados = self.__tela_doador.pega_dados_doador()
+            doador.cpf = novos_dados['cpf']
+            doador.nome = novos_dados['nome']
+            doador.data_nasc = novos_dados['data_nasc']
+            doador.endereco = novos_dados['endereco']
         else:
-            self.__tela_gato.mostra_mensagem('ATENCAO: Gato não existente')
-        self.lista_gatos()
+            self.__tela_doador.mostra_mensagem('ATENCAO: doador não existente')
+        self.lista_doadores()
 
-    def lista_gatos(self):
-        for gato in self.__gatos:
-            dados = {"numero_chip": gato.numero_chip,
-                     "nome": gato.nome,
-                     "raca": gato.raca}
-            self.__tela_gato.mostra_gato(dados)
+    def lista_doadores(self):
+        for doador in self.__doadores:
+            dados = {'cpf': doador.cpf,
+                     'nome': doador.nome,
+                     'data_nasc': doador.data_nasc,
+                     'endereco': doador.endereco}
+            self.__tela_doador.mostra_doador(dados)
 
-    def excluir_gato(self):
-        self.lista_gatos()
-        numero_gato = self.__tela_gato.seleciona_gato()
-        gato = self.pega_gato_por_numero(numero_gato)
+    def excluir_doador(self):
+        self.lista_doadores()
+        numero_doador = self.__tela_doador.seleciona_doador()
+        doador = self.pega_doador_por_cpf(numero_doador)
 
-        if gato is not None:
-            self.__gatos.remove(gato)
+        if doador is not None:
+            self.__doadores.remove(doador)
         else:
-            self.__tela_gato.mostra_mensagem('ATENCAO: Gato não existente')
+            self.__tela_doador.mostra_mensagem('ATENCAO: doador não existente')
         
-        self.lista_gatos()
+        self.lista_doadores()
 
-    def pega_gato_por_numero(self, numero_gato):
-        for gato in self.__gatos:
-            if gato.numero_chip == numero_gato:
-                return gato
+    def pega_doador_por_cpf(self, cpf_doador):
+        for doador in self.__doadores:
+            if doador.cpf == cpf_doador:
+                return doador
         return None
 
     def abre_tela(self):
-        lista_opcoes = {1: self.incluir_gato,
-                        2: self.alterar_gato,
-                        3: self.lista_gato,
-                        4: self.excluir_gato,
+        lista_opcoes = {1: self.incluir_doador,
+                        2: self.alterar_doador,
+                        3: self.lista_doador,
+                        4: self.excluir_doador,
                         0: self.retornar}
 
         while True:
-            lista_opcoes[self.__tela_gato.tela_opcoes()]()
+            lista_opcoes[self.__tela_doador.tela_opcoes()]()
     
     def retornar(self):
         self.__controlador_sistema.abre_tela()

@@ -12,31 +12,6 @@ class TelaPessoa:
         
         opcao = int(input('Escolha a opção: '))
         return opcao
-    
-    def pega_dados_pessoa(self):
-        tipo = self.decide_tipo_pessoa()
-        print('\n-------- DADOS PESSOA ----------')
-        cpf = input('CPF: ')
-        nome = input('Nome: ')
-        raw_data_nasc = input('Data de Nascimento (Formato, dd/mm/aaaa): ').split('/')
-        data_dict = {'day': int(raw_data_nasc[0]),
-                     'month': int(raw_data_nasc[1]),
-                     'year': int(raw_data_nasc[2])}
-        data_nasc = Date(**data_dict)
-        endereco = input('Endereco: ')
-        
-        if tipo == 1: # Tipo Doador
-            return {
-                'cpf': cpf, 'nome': nome,
-                'data_nasc': data_nasc, 'endereco': endereco
-            }
-        else:
-            # return {
-            #     'cpf': cpf, 'nome': nome,
-            #     'data_nasc': data_nasc, 'endereco': endereco,
-            #     'habitacao': habitacao
-            # }
-            pass
 
     def decide_tipo_pessoa(self):
         print('\n-------- TIPO PESSOA ----------')

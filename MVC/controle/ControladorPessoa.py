@@ -7,14 +7,13 @@ class ControladorPessoa:
     def __init__(self, controlador_sistema) -> None:
         self.__controlador_sistema = controlador_sistema
         self.__controlador_doador = ControladorDoador(controlador_sistema)
-        # self.__controlador_cachorro = ControladorCachorro(controlador_sistema)
         self.__pessoas = [] # type: ignore # E se eu fizer uma matriz Nx2?
         self.__tela_pessoa = TelaPessoa()
 
     def incluir_pessoa(self):
         opcao = self.__tela_pessoa.decide_tipo_pessoa()
         if opcao == 1:
-            nova_pessoa = self.__controlador_doador.incluir_gato()
+            nova_pessoa = self.__controlador_doador.incluir_doador()
         else:
             # nova_pessoa = self.__controlador_cachorro.incluir_cachorro()
             pass
@@ -23,7 +22,7 @@ class ControladorPessoa:
     def alterar_pessoa(self):
         opcao = self.__tela_pessoa.decide_tipo_pessoa()
         if opcao == 1:
-            self.__controlador_doador.alterar_gato()
+            self.__controlador_doador.alterar_doador()
         else:
             # self.__controlador_cachorro.alterar_cachorro()
             pass
@@ -32,7 +31,7 @@ class ControladorPessoa:
         opcao = self.__tela_pessoa.decide_mostra_tipo()
 
         if opcao == 1:
-            self.__controlador_doador.lista_gatos() # placeholder
+            self.__controlador_doador.lista_doadores() # placeholder
         elif opcao == 2:
             # print(self.__controlador_cachorro.__cachorros) # placeholder
             pass
@@ -44,7 +43,12 @@ class ControladorPessoa:
         
 
     def excluir_pessoa(self):
-        pass
+        opcao = self.__tela_pessoa.decide_tipo_pessoa()
+        if opcao == 1:
+            self.__controlador_doador.excluir_doador()
+        else:
+            # self.__controlador_cachorro.excluir_cachorro()
+            pass
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_pessoa,
