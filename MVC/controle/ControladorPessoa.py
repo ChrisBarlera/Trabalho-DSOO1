@@ -45,3 +45,16 @@ class ControladorPessoa:
 
     def excluir_pessoa(self):
         pass
+
+    def abre_tela(self):
+        lista_opcoes = {1: self.incluir_pessoa,
+                        2: self.alterar_pessoa,
+                        3: self.lista_pessoas,
+                        4: self.excluir_pessoa,
+                        0: self.retornar}
+
+        while True:
+            lista_opcoes[self.__tela_pessoa.tela_opcoes()]()
+    
+    def retornar(self):
+        self.__controlador_sistema.abre_tela()
