@@ -39,7 +39,7 @@ class Adotante(Pessoa):
     @possui_animais.setter
     def possui_animais(self, possui_animais: bool):
         if isinstance(possui_animais, bool):
-            self.possui_animais = possui_animais
+            self.__possui_animais = possui_animais
         else:
             print('Valor inválido. O valor deve ser um bool')
 

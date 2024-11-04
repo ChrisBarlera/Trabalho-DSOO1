@@ -46,7 +46,7 @@ class TelaAdotante:
         return resposta
     
     def tbm_trocar_habitacao(self):
-        resposta = bool(int(input('\nTambém trocar habitação? (1: Sim, 0: Não): ')))
+        resposta = bool(int(input('\nTambém alterar habitação? (1: Sim, 0: Não): ')))
         return resposta
     
     def mostra_mensagem(self, msg):

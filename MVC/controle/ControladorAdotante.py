@@ -38,7 +38,8 @@ class ControladorAdotante:
 
         if adotante is not None:
             if self.tbm_trocar_habitacao():
-                self.__controlador_habitacao.alterar_habitacao(adotante.habitacao)
+                nova_hab = self.__controlador_habitacao.incluir_habitacao()
+                adotante.habitacao = nova_hab
             novos_dados = self.__tela_adotante.pega_dados_adotante()
             adotante.cpf = novos_dados['cpf']
             adotante.nome = novos_dados['nome']
