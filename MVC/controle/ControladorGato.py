@@ -33,9 +33,9 @@ class ControladorGato:
 
     def lista_gatos(self):
         for gato in self.__gatos:
-            dados = {"numero_chip": gato.numero_chip,
-                     "nome": gato.nome,
-                     "raca": gato.raca}
+            dados = {'numero_chip': gato.numero_chip,
+                     'nome': gato.nome,
+                     'raca': gato.raca}
             self.__tela_gato.mostra_gato(dados)
 
     def excluir_gato(self):
@@ -46,7 +46,7 @@ class ControladorGato:
         if gato is not None:
             self.__gatos.remove(gato)
         else:
-            self.__tela_gato.mostra_mensagem('ATENCAO: Gato não existente')
+            self.__tela_gato.mostra_mensagem('ATENCAO: gato não existente')
         
         self.lista_gatos()
 

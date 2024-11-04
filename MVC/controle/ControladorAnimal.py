@@ -1,15 +1,12 @@
 from limite.TelaAnimal import TelaAnimal
-from controle.ControladorGato import ControladorGato
-from entidade.Gato import Gato  #necessario para isInstance()
-from entidade.Cachorro import Cachorro #necessario para isInstance()
 
 
 class ControladorAnimal:
 
     def __init__(self, controlador_sistema) -> None:
         self.__controlador_sistema = controlador_sistema
-        self.__controlador_gato = ControladorGato(controlador_sistema)
-        # self.__controlador_cachorro = ControladorCachorro(controlador_sistema)
+        self.__controlador_gato = controlador_sistema.controlador_gato
+        self.__controlador_cachorro = controlador_sistema.controlador_cachorro
         self.__animais = [] # type: ignore # E se eu fizer uma matriz Nx2?
         self.__tela_animal = TelaAnimal()
 
@@ -18,8 +15,7 @@ class ControladorAnimal:
         if opcao == 1:
             novo_animal = self.__controlador_gato.incluir_gato()
         else:
-            # novo_animal = self.__controlador_cachorro.incluir_cachorro()
-            pass
+            novo_animal = self.__controlador_cachorro.incluir_cachorro()
         self.__animais.append(novo_animal)
     
     def alterar_animal(self):
@@ -27,8 +23,7 @@ class ControladorAnimal:
         if opcao == 1:
             self.__controlador_gato.alterar_gato()
         else:
-            # self.__controlador_cachorro.alterar_cachorro()
-            pass
+            self.__controlador_cachorro.alterar_cachorro()
 
     def lista_animais(self):
         opcao = self.__tela_animal.decide_mostra_tipo()
@@ -36,8 +31,7 @@ class ControladorAnimal:
         if opcao == 1:
             self.__controlador_gato.lista_gatos() # placeholder
         elif opcao == 2:
-            # print(self.__controlador_cachorro.__cachorros) # placeholder
-            pass
+            self.__controlador_cachorro.lista_cachorros()
         else:
             # for animal in self.__animais:
             #     if isinstance(animal,Gato):

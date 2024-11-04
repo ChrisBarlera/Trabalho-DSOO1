@@ -1,3 +1,5 @@
+from controle.ControladorGato import ControladorGato
+from controle.ControladorCachorro import ControladorCachorro
 from controle.ControladorAnimal import ControladorAnimal
 from controle.ControladorPessoa import ControladorPessoa
 from controle.ControladorDoador import ControladorDoador
@@ -14,6 +16,8 @@ class ControladorSistema:
         self.__doacoes = [] # type: ignore
         self.__pessoas = [] # type: ignore
         self.__tela_sistema = TelaSistema()
+        self.__controlador_gato = ControladorGato(self)
+        self.__controlador_cachorro = ControladorCachorro(self)
         self.__controlador_animal = ControladorAnimal(self)
         self.__controlador_doador = ControladorDoador(self)
         self.__controlador_habitacao = ControladorHabitacao(self)
@@ -56,6 +60,14 @@ class ControladorSistema:
     
     def acessar_habitacao(self):
         self.__controlador_habitacao.abre_tela()
+    
+    @property
+    def controlador_gato(self):
+        return self.__controlador_gato
+    
+    @property
+    def controlador_cachorro(self):
+        return self.__controlador_cachorro
 
     @property
     def controlador_animal(self):
