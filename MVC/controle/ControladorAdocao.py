@@ -17,9 +17,15 @@ class ControladorAdocao:
         
         if self.ja_tem_adotante():
             adotante = self.__controlador_adotante.seleciona_adotante()
+            if adotante.calcula_idade() < 18:
+                self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
+                return None
         else:
             self.__tela_adocao.mostra_mensagem('Cadastre um adotante')
             adotante = self.__controlador_adotante.incluir_adotante()
+            if adotante.calcula_idade() < 18:
+                self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
+                return None
         
         if self.ja_tem_animal():
             animal = self.__controlador_animal.seleciona_animal()

@@ -21,6 +21,7 @@ class ControladorVacinacao:
                                    animal,
                                    dados_vacinacao['vacina'])
         self.__vacinacoes.append(nova_vacinacao)
+        animal.vacinacoes.append(nova_vacinacao)
         return nova_vacinacao
     
     def alterar_vacinacao(self):

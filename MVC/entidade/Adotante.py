@@ -42,7 +42,3 @@ class Adotante(Pessoa):
             self.__possui_animais = possui_animais
         else:
             print('Valor inválido. O valor deve ser um bool')
-
-    def calcula_idade(self):
-        hoje = Date.today()
-        return (hoje - self.__data_nasc).days // 365 # type: ignore

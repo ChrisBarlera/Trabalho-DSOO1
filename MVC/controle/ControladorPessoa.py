@@ -45,8 +45,7 @@ class ControladorPessoa:
         if opcao == 1:
             self.__controlador_doador.excluir_doador()
         else:
-            # self.__controlador_adotante.excluir_adotante()
-            pass
+            self.__controlador_adotante.excluir_adotante()
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_pessoa,

@@ -75,3 +75,7 @@ class Pessoa(ABC):
             self.__endereco = endereco
         else:
             print('Valor inválido. O valor deve ser um str')
+    
+    def calcula_idade(self):
+        hoje = Date.today()
+        return (hoje - self.__data_nasc).days // 365 # type: ignore
