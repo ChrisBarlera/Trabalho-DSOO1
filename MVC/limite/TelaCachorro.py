@@ -15,7 +15,10 @@ class TelaCachorro:
         numero_chip = int(input('Número do chip: '))
         nome = input('Nome: ')
         raca = input('Raça: ')
-        tamanho = input('Tamanho: ')
+        print('Tamanho 1: Pequeno')
+        print('Tamanho 2: Médio')
+        print('Tamanho 3: Grande')
+        tamanho = int(input('Escolha um tamanho: '))
 
         return {'numero_chip': numero_chip, 'nome': nome,
                 'raca': raca, 'tamanho': tamanho}

@@ -8,6 +8,7 @@ class ControladorAdocao:
         self.__controlador_adotante = controlador_sistema.controlador_adotante
         self.__controlador_animal = controlador_sistema.controlador_animal
         self.__controlador_doacao = controlador_sistema.controlador_doacao
+        self.__controlador_cachorro = controlador_sistema.controlador_cachorro
         self.__adocoes = [] # type: ignore
         self.__tela_adocao = TelaAdocao()
         self.__contador_id = 1
@@ -31,22 +32,30 @@ class ControladorAdocao:
             self.__tela_adocao.mostra_mensagem('Cadastre um adotante')
             adotante = self.__controlador_adotante.incluir_adotante()
 
+
         # REGRA DE IDADE
-        # if adotante.calcula_idade() < 18:
-        #     self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
-        #     return None
+        if adotante.calcula_idade() < 18:
+            self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
+            return None
         
         # REGRA DE VACINA DO ANIMAL NA ADOCAO
         if self.ja_tem_animal():
             animal = self.__controlador_animal.seleciona_animal()
-            # if len(animal.vacinacoes) < 3:
-            #     self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
-            #     return None
+            if len(animal.vacinacoes) < 3:
+                self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
+                return None
         else:
             ## se o animal não está cadastrado, ele certamente não está vacinado
             self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
             return None
         
+        # REGRA DE CACHORRO GRANDE E AP PEQUENO
+        if animal.especie == 'CACHORRO':
+            if (animal.tamanho == 3 and adotante.habitacao.tamanho == 1
+                and adotante.habitacao.tipo == 2):
+                self.__tela_adocao.mostra_mensagem('Cão grande demais para o apartamento')
+                return None 
+
         dados_adocao = self.__tela_adocao.pega_dados_adocao()
         nova_adocao = Adocao(self.__contador_id, adotante, animal, dados_adocao['data'])
         self.__contador_id += 1

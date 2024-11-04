@@ -5,7 +5,6 @@ class TelaAnimal:
         print('2 - Alterar Animal')
         print('3 - Listar Animais')
         print('4 - Excluir Animal')
-        print('5 - Vacinar Animal')
         print('0 - Retornar')
         
         opcao = int(input('Escolha a opção: '))

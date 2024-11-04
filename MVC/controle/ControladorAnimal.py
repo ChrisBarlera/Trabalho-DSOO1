@@ -68,7 +68,6 @@ class ControladorAnimal:
                         2: self.alterar_animal,
                         3: self.lista_animais,
                         4: self.excluir_animal,
-                        5: self.vacinar_animal,
                         0: self.retornar}
 
         while True:
