@@ -13,19 +13,13 @@ class TelaAdocao:
         return opcao
     
     def pega_dados_adocao(self):
-        print('\n-------- DADOS DOAÇÃO ----------')
-        
-        # cpf = int(input('CPF: '))
-        # nome = input('Nome: ')
-        # raw_data_nasc = input('Data de Nascimento (Formato dd/mm/2024): ').split('/')
-        # data_dict = {'day': int(raw_data_nasc[0]),
-        #              'month': int(raw_data_nasc[1]),
-        #              'year': int(raw_data_nasc[2])}
-        # data_nasc = Date(**data_dict)
-        # endereco = input('Seu endereço completo: ')
-
-        # return {'cpf': cpf, 'nome': nome,
-        #         'data_nasc': data_nasc, 'endereco': endereco}
+        print('\n-------- DADOS ADOÇÃO ----------')
+        raw_data_nasc = input('Data da Adoção (Formato dd/mm/yyyy): ').split('/')
+        data_dict = {'day': int(raw_data_nasc[0]),
+                     'month': int(raw_data_nasc[1]),
+                     'year': int(raw_data_nasc[2])}
+        data = Date(**data_dict)
+        return {'data': data}
     
     def mostra_adocao(self, dados_adocao):
         print('\nCPF DO ADOÇÃO: ', dados_adocao['cpf'])
@@ -36,6 +30,14 @@ class TelaAdocao:
     def seleciona_adocao(self):
         numero = int(input('\nNúmero da adoção que deseja selecionar: '))
         return numero
+
+    def ja_tem_adotante(self):
+        resposta = bool(int(input('\nAdotante já cadastrado? (1: Sim, 0: Não): ')))
+        return resposta
+    
+    def ja_tem_animal(self):
+        resposta = bool(int(input('\nAnimal já cadastrado? (1: Sim, 0: Não): ')))
+        return resposta
     
     def mostra_mensagem(self, msg):
         print(msg)

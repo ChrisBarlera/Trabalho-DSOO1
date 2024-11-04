@@ -11,16 +11,21 @@ class ControladorAdocao:
         self.__tela_adocao = TelaAdocao()
 
     def incluir_adocao(self):
-        self.__controlador_animal.lista_animais()
-        self.__controlador_adotante.lista_adotantes()
-        numero_adocao = self.__tela_adocao.seleciona_adocao()
-        adocao = self.pega_adocao_por_numero(numero_adocao)
-
+        adotante = None
+        animal = None
+        
+        if self.ja_tem_adotante():
+            adotante = self.__controlador_adotante.seleciona_adotante()
+        else:
+            adotante = self.__controlador_adotante.incluir_adotante()
+        
+        if self.ja_tem_animal():
+            animal = self.__controlador_animal.seleciona_animal()
+        else:
+            animal = self.__controlador_animal.incluir_animal()
+        
         dados_adocao = self.__tela_adocao.pega_dados_adocao()
-        nova_adocao = Adocao(dados_adocao['cpf'], 
-                         dados_adocao['nome'],
-                         dados_adocao['data_nasc'],
-                         dados_adocao['endereco'])
+        nova_adocao = Adocao(adotante, animal, dados_adocao['data'])
         self.__adocoes.append(nova_adocao)
         return nova_adocao
     
@@ -36,7 +41,7 @@ class ControladorAdocao:
             adocao.data_nasc = novos_dados['data_nasc']
             adocao.endereco = novos_dados['endereco']
         else:
-            self.__tela_adocao.mostra_mensagem('ATENCAO: adoção não existente')
+            self.__tela_adocao.mostra_mensagem('ATENÇÃO: adoção não existente')
         self.lista_adocoes()
 
     def lista_adocoes(self):
@@ -65,10 +70,16 @@ class ControladorAdocao:
                 return adocao
         return None
 
+    def ja_tem_adotante(self):
+        return self.__tela_adocao.ja_tem_adotante()
+    
+    def ja_tem_animal(self):
+        return self.__tela_adocao.ja_tem_animal()
+
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_adocao,
                         2: self.alterar_adocao,
-                        3: self.lista_adocao,
+                        3: self.lista_adocoes,
                         4: self.excluir_adocao,
                         0: self.retornar}
 

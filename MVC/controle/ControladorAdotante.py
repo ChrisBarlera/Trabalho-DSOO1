@@ -88,6 +88,11 @@ class ControladorAdotante:
         while True:
             lista_opcoes[self.__tela_adotante.tela_opcoes()]()
 
+    def seleciona_adotante(self):
+        self.lista_adotantes()
+        cpf = self.__tela_adotante.seleciona_adotante()
+        return self.pega_adotante_por_cpf(cpf)
+
     def habitacao_ja_cadastrada(self):
         return self.__tela_adotante.habitacao_ja_cadastrada()
     
