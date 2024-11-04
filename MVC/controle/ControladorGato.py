@@ -28,7 +28,7 @@ class ControladorGato:
             gato.nome = novos_dados['nome']
             gato.raca = novos_dados['raca']
         else:
-            self.__tela_gato.mostra_mensagem('ATENCAO: Gato não existente')
+            self.__tela_gato.mostra_mensagem('ATENCAO: gato não existente')
         self.lista_gatos()
 
     def lista_gatos(self):

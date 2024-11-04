@@ -17,11 +17,13 @@ class ControladorAdocao:
         if self.ja_tem_adotante():
             adotante = self.__controlador_adotante.seleciona_adotante()
         else:
+            self.__tela_adocao.mostra_mensagem('Cadastre um adotante')
             adotante = self.__controlador_adotante.incluir_adotante()
         
         if self.ja_tem_animal():
             animal = self.__controlador_animal.seleciona_animal()
         else:
+            self.__tela_adocao.mostra_mensagem('Cadastre um animal')
             animal = self.__controlador_animal.incluir_animal()
         
         dados_adocao = self.__tela_adocao.pega_dados_adocao()
@@ -46,11 +48,12 @@ class ControladorAdocao:
 
     def lista_adocoes(self):
         for adocao in self.__adocoes:
-            dados = {'cpf': adocao.cpf,
-                     'nome': adocao.nome,
-                     'data_nasc': adocao.data_nasc,
-                     'endereco': adocao.endereco}
+            dados = {'data': adocao.data,
+                     'animal': adocao.animal,
+                     'adotante': adocao.adotante}
             self.__tela_adocao.mostra_adocao(dados)
+            self.__controlador_animal.mostra_animal_especifico(dados['animal'])
+            self.__controlador_adotante.mostra_adotante_especifico(dados['adotante'])
 
     def excluir_adocao(self):
         self.lista_adocoes()

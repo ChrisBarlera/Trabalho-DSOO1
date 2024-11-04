@@ -22,10 +22,7 @@ class TelaAdocao:
         return {'data': data}
     
     def mostra_adocao(self, dados_adocao):
-        print('\nCPF DO ADOÇÃO: ', dados_adocao['cpf'])
-        print('NOME DO ADOÇÃO: ', dados_adocao['nome'])
-        print('DATA DE NASCIMENTO DO ADOÇÃO: ', dados_adocao['data_nasc'])
-        print('ENDEREÇO DO ADOÇÃO: ', dados_adocao['endereco'])
+        print('\nDATA DA ADOÇÃO: ', dados_adocao['data'])
 
     def seleciona_adocao(self):
         numero = int(input('\nNúmero da adoção que deseja selecionar: '))
@@ -40,4 +37,4 @@ class TelaAdocao:
         return resposta
     
     def mostra_mensagem(self, msg):
-        print(msg)
+        print(f'\n{msg}')

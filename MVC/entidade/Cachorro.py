@@ -14,6 +14,12 @@ class Cachorro(Animal):
             self.__tamanho = tamanho
         else:
             print('Tipo inválido')
+        
+        self.__especie = 'CACHORRO'
+
+    @property
+    def especie(self):
+        return self.__especie
     
     @property
     def tamanho(self):

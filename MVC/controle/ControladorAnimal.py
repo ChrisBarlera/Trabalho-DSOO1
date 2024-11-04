@@ -17,6 +17,7 @@ class ControladorAnimal:
         else:
             novo_animal = self.__controlador_cachorro.incluir_cachorro()
         self.__animais.append(novo_animal)
+        return novo_animal
     
     def alterar_animal(self):
         opcao = self.__tela_animal.decide_tipo_animal()
@@ -41,6 +42,21 @@ class ControladorAnimal:
 
     def excluir_animal(self):
         pass
+
+    def seleciona_animal(self):
+        opcao = self.__tela_animal.decide_tipo_animal()
+        if opcao == 1:
+            animal = self.__controlador_gato.seleciona_gato()
+        else:
+            animal = self.__controlador_cachorro.seleciona_cachorro()
+        return animal
+
+    def mostra_animal_especifico(self, animal):
+        dados = {'nome': animal.nome,
+                 'numero': animal.numero_chip,
+                 'especie': animal.especie,
+                 'raca': animal.raca}
+        self.__tela_animal.mostra_animal_especifico(dados)
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_animal,

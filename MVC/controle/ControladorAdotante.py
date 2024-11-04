@@ -92,6 +92,11 @@ class ControladorAdotante:
         self.lista_adotantes()
         cpf = self.__tela_adotante.seleciona_adotante()
         return self.pega_adotante_por_cpf(cpf)
+    
+    def mostra_adotante_especifico(self, adotante):
+        dados = {'nome': adotante.nome,
+                 'cpf': adotante.cpf}
+        self.__tela_adotante.mostra_adotante_especifico(dados)
 
     def habitacao_ja_cadastrada(self):
         return self.__tela_adotante.habitacao_ja_cadastrada()

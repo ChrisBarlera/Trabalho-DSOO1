@@ -29,6 +29,11 @@ class Animal(ABC):
             print('Tipo inválido')
 
     @property
+    @abstractmethod
+    def especie(self):
+        pass
+
+    @property
     def numero_chip(self):
         return self.__numero_chip
     

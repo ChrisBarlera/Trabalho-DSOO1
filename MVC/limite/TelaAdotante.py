@@ -37,6 +37,10 @@ class TelaAdotante:
         print('NÚEMERO DA HABITAÇÃO DO ADOTANTE: ', dados_adotante['habitacao'].numero)
         print('ADOTANTE POSSUI ANIMAIS?: ', dados_adotante['possui_animais'])
 
+    def mostra_adotante_especifico(self, dados_adotante):
+        print('NOME DO ADOTANTE:', dados_adotante['nome'])
+        print('CPF DO ADOTANTE:', dados_adotante['cpf'])
+
     def seleciona_adotante(self):
         cpf = int(input('\nCPF do adotante para selecionar: '))
         return cpf
