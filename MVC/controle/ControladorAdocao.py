@@ -17,21 +17,25 @@ class ControladorAdocao:
         
         if self.ja_tem_adotante():
             adotante = self.__controlador_adotante.seleciona_adotante()
-            if adotante.calcula_idade() < 18:
-                self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
-                return None
         else:
             self.__tela_adocao.mostra_mensagem('Cadastre um adotante')
             adotante = self.__controlador_adotante.incluir_adotante()
-            if adotante.calcula_idade() < 18:
-                self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
-                return None
+
+        # REGRA DE IDADE
+        if adotante.calcula_idade() < 18:
+            self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
+            return None
         
+        # REGRA DE VACINA DO ANIMAL NA ADOCAO
         if self.ja_tem_animal():
             animal = self.__controlador_animal.seleciona_animal()
+            if len(animal.vacinacoes) < 3:
+                self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
+                return None
         else:
-            self.__tela_adocao.mostra_mensagem('Cadastre um animal')
-            animal = self.__controlador_animal.incluir_animal()
+            ## se o animal não está cadastrado, ele certamente não está vacinado
+            self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
+            return None
         
         dados_adocao = self.__tela_adocao.pega_dados_adocao()
         nova_adocao = Adocao(self.__contador_id, adotante, animal, dados_adocao['data'])
