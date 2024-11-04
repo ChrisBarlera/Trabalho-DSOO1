@@ -55,6 +55,11 @@ class ControladorGato:
             if gato.numero_chip == numero_gato:
                 return gato
         return None
+    
+    def seleciona_gato(self):
+        self.lista_gatos()
+        numero = self.__tela_gato.seleciona_gato()
+        return self.pega_gato_por_numero(numero)
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_gato,

@@ -5,7 +5,7 @@ from controle.ControladorPessoa import ControladorPessoa
 from controle.ControladorDoador import ControladorDoador
 from controle.ControladorAdotante import ControladorAdotante
 from controle.ControladorAdocao import ControladorAdocao
-# from controle.ControladorDoacao import ControladorDoacao
+from controle.ControladorDoacao import ControladorDoacao
 from controle.ControladorHabitacao import ControladorHabitacao
 from limite.TelaSistema import TelaSistema
 
@@ -24,7 +24,7 @@ class ControladorSistema:
         self.__controlador_adotante = ControladorAdotante(self)
         self.__controlador_pessoa = ControladorPessoa(self)
         self.__controlador_adocao = ControladorAdocao(self)
-        # self.__controlador_doacao = ControladorDoacao(self)
+        self.__controlador_doacao = ControladorDoacao(self)
     
     def inicializa_sistema(self):
         self.abre_tela()
@@ -56,7 +56,7 @@ class ControladorSistema:
         self.__controlador_adocao.abre_tela()
     
     def acessar_doacao(self):
-        pass
+        self.controlador_doacao.abre_tela()
     
     def acessar_habitacao(self):
         self.__controlador_habitacao.abre_tela()

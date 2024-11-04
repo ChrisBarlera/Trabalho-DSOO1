@@ -58,6 +58,11 @@ class ControladorDoador:
             if doador.cpf == cpf_doador:
                 return doador
         return None
+    
+    def seleciona_doador(self):
+        self.lista_doadores()
+        cpf = self.__tela_doador.seleciona_doador()
+        return self.pega_doador_por_cpf(cpf)
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_doador,
