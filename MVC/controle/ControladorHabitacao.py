@@ -17,10 +17,13 @@ class ControladorHabitacao:
         self.__habitacoes.append(nova_habitacao)
         return nova_habitacao
     
-    def alterar_habitacao(self):
-        self.lista_habitacoes()
-        numero_habitacao = self.__tela_habitacao.seleciona_habitacao()
-        habitacao = self.pega_habitacao_por_numero(numero_habitacao)
+    def alterar_habitacao(self, hab_especifica=None):
+        if hab_especifica is not None:
+            habitacao = hab_especifica
+        else:
+            self.lista_habitacoes()
+            numero_habitacao = self.__tela_habitacao.seleciona_habitacao()
+            habitacao = self.pega_habitacao_por_numero(numero_habitacao)
 
         if habitacao is not None:
             novos_dados = self.__tela_habitacao.pega_dados_habitacao()

@@ -3,10 +3,10 @@ from entidade.Adocao import Adocao
 
 
 class ControladorAdocao:
-    def __init__(self, controlador_sistema, controlador_adotante, controlador_animal):
+    def __init__(self, controlador_sistema):
         self.__controlador_sistema = controlador_sistema
-        self.__controlador_adotante = controlador_adotante
-        self.__controlador_animal = controlador_animal
+        self.__controlador_adotante = controlador_sistema.controlador_adotante
+        self.__controlador_animal = controlador_sistema.controlador_animal
         self.__adocoes = [] # type: ignore
         self.__tela_adocao = TelaAdocao()
 

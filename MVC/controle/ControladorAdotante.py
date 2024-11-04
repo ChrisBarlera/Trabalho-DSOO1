@@ -1,36 +1,49 @@
 from limite.TelaAdotante import TelaAdotante
 from entidade.Adotante import Adotante
+from controle.ControladorHabitacao import ControladorHabitacao
 
 
 class ControladorAdotante:
     def __init__(self, controlador_sistema) -> None:
         self.__controlador_sistema = controlador_sistema
+        self.__controlador_habitacao = controlador_sistema.controlador_habitacao
         self.__adotantes = [] # type: ignore
         self.__tela_adotante = TelaAdotante()
 
     def incluir_adotante(self):
+        habitacao = None
+        if self.habitacao_ja_cadastrada():
+            self.__controlador_habitacao.lista_habitacoes()
+            numero = self.__controlador_habitacao.__tela_habitacao.seleciona_habitacao()
+            habitacao = self.__controlador_habitacao.pega_habitacao_por_numero(numero)
+        else:
+            self.__tela_adotante.mostra_adotante('Cadastre uma habitação')
+            habitacao = self.__controlador_habitacao.incluir_habitacao()
+
+        self.__tela_adotante.mostra_adotante('Cadastre o adotante')
         dados_adotante = self.__tela_adotante.pega_dados_adotante()
         novo_adotante = Adotante(dados_adotante['cpf'], 
-                         dados_adotante['nome'],
-                         dados_adotante['data_nasc'],
-                         dados_adotante['endereco'],
-                         '', # Precisa ver habitacao
-                         dados_adotante['possui_animais'])
+                        dados_adotante['nome'],
+                        dados_adotante['data_nasc'],
+                        dados_adotante['endereco'],
+                        habitacao,
+                        dados_adotante['possui_animais'])
         self.__adotantes.append(novo_adotante)
         return novo_adotante
-    
+
     def alterar_adotante(self):
         self.lista_adotantes()
         numero_adotante = self.__tela_adotante.seleciona_adotante()
         adotante = self.pega_adotante_por_cpf(numero_adotante)
 
         if adotante is not None:
+            if self.tbm_trocar_habitacao():
+                self.__controlador_habitacao.alterar_habitacao(adotante.habitacao)
             novos_dados = self.__tela_adotante.pega_dados_adotante()
             adotante.cpf = novos_dados['cpf']
             adotante.nome = novos_dados['nome']
             adotante.data_nasc = novos_dados['data_nasc']
             adotante.endereco = novos_dados['endereco']
-            adotante.habitacao = novos_dados['habitacao']
             adotante.possui_animais = novos_dados['possui_animais']
         else:
             self.__tela_adotante.mostra_mensagem('ATENCAO: adotante não existente')
@@ -73,6 +86,12 @@ class ControladorAdotante:
 
         while True:
             lista_opcoes[self.__tela_adotante.tela_opcoes()]()
+
+    def habitacao_ja_cadastrada(self):
+        return self.__tela_adotante.habitacao_ja_cadastrada()
+    
+    def tbm_trocar_habitacao(self):
+        return self.__tela_adotante.tbm_trocar_habitacao()
     
     def retornar(self):
         self.__controlador_sistema.abre_tela()

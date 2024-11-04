@@ -34,11 +34,20 @@ class TelaAdotante:
         print('NOME DO ADOTANTE: ', dados_adotante['nome'])
         print('DATA DE NASCIMENTO DO ADOTANTE: ', dados_adotante['data_nasc'])
         print('ENDEREÇO DO ADOTANTE: ', dados_adotante['endereco'])
+        print('NÚEMERO DA HABITAÇÃO DO ADOTANTE: ', dados_adotante['habitacao'].numero)
         print('ADOTANTE POSSUI ANIMAIS?: ', dados_adotante['possui_animais'])
 
     def seleciona_adotante(self):
         cpf = int(input('\nCPF do adotante para selecionar: '))
         return cpf
     
+    def habitacao_ja_cadastrada(self):
+        resposta = bool(int(input('\nHabitação já cadastrada? (1: Sim, 0: Não): ')))
+        return resposta
+    
+    def tbm_trocar_habitacao(self):
+        resposta = bool(int(input('\nTambém trocar habitação? (1: Sim, 0: Não): ')))
+        return resposta
+    
     def mostra_mensagem(self, msg):
-        print(msg)
+        print(f'\n{msg}')

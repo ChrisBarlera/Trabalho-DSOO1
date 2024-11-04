@@ -1,5 +1,7 @@
 from controle.ControladorAnimal import ControladorAnimal
 from controle.ControladorPessoa import ControladorPessoa
+from controle.ControladorDoador import ControladorDoador
+from controle.ControladorAdotante import ControladorAdotante
 from controle.ControladorAdocao import ControladorAdocao
 # from controle.ControladorDoacao import ControladorDoacao
 from controle.ControladorHabitacao import ControladorHabitacao
@@ -13,12 +15,12 @@ class ControladorSistema:
         self.__pessoas = [] # type: ignore
         self.__tela_sistema = TelaSistema()
         self.__controlador_animal = ControladorAnimal(self)
-        self.__controlador_pessoa = ControladorPessoa(self)
-        self.__controlador_adocao = ControladorAdocao(self,
-                                                      self.__controlador_pessoa.__controlador_adotante,
-                                                      self.__controlador_animal)
-        # self.__controlador_daocao = ControladorDaocao(self)
+        self.__controlador_doador = ControladorDoador(self)
         self.__controlador_habitacao = ControladorHabitacao(self)
+        self.__controlador_adotante = ControladorAdotante(self)
+        self.__controlador_pessoa = ControladorPessoa(self)
+        self.__controlador_adocao = ControladorAdocao(self)
+        # self.__controlador_doacao = ControladorDoacao(self)
     
     def inicializa_sistema(self):
         self.abre_tela()
@@ -54,3 +56,31 @@ class ControladorSistema:
     
     def acessar_habitacao(self):
         self.__controlador_habitacao.abre_tela()
+
+    @property
+    def controlador_animal(self):
+        return self.__controlador_animal
+
+    @property
+    def controlador_pessoa(self):
+        return self.__controlador_pessoa
+    
+    @property
+    def controlador_doador(self):
+        return self.__controlador_doador
+
+    @property
+    def controlador_adotante(self):
+        return self.__controlador_adotante
+
+    @property
+    def controlador_adocao(self):
+        return self.__controlador_adocao
+
+    @property
+    def controlador_doacao(self):
+        return self.__controlador_doacao
+    
+    @property
+    def controlador_habitacao(self):
+        return self.__controlador_habitacao

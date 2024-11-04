@@ -32,6 +32,17 @@ class Habitacao:
             print('Tipo inválido')
 
     @property
+    def numero(self):
+        return self.__numero
+    
+    @numero.setter
+    def numero(self, numero: int):
+        if isinstance(numero, int):
+            self.__numero = numero
+        else:
+            print('Valor inválido. O valor deve ser um str')
+    
+    @property
     def tipo(self):
         return self.__tipo
     
@@ -40,7 +51,7 @@ class Habitacao:
         if isinstance(tipo, str):
             self.__tipo = tipo
         else:
-            print("Valor inválido. O valor deve ser um str")
+            print('Valor inválido. O valor deve ser um str')
 
     @property
     def tamanho(self):
@@ -51,4 +62,4 @@ class Habitacao:
         if isinstance(tamanho, str):
             self.__tamanho = tamanho
         else:
-            print("Valor inválido. O valor deve ser um str")
+            print('Valor inválido. O valor deve ser um str')
