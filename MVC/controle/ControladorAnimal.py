@@ -41,7 +41,11 @@ class ControladorAnimal:
         
 
     def excluir_animal(self):
-        pass
+        opcao = self.__tela_animal.decide_tipo_animal()
+        if opcao == 1:
+            self.__controlador_gato.excluir_gato()
+        else:
+            self.__controlador_cachorro.excluir_cachorro()
 
     def seleciona_animal(self):
         opcao = self.__tela_animal.decide_tipo_animal()

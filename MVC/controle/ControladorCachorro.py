@@ -58,6 +58,12 @@ class ControladorCachorro:
                 return cachorro
         return None
 
+    def seleciona_cachorro(self):
+        self.lista_cachorros()
+        numero_cachorro =  self.__tela_cachorro.seleciona_cachorro()
+        cachorro = self.pega_cachorro_por_numero(numero_cachorro)
+        return cachorro
+
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_cachorro,
                         2: self.alterar_cachorro,

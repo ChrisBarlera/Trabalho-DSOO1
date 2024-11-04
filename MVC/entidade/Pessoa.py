@@ -41,7 +41,7 @@ class Pessoa(ABC):
         if isinstance(cpf, int):
             self.__cpf = cpf
         else:
-            print("Valor inválido. O valor deve ser um int")
+            print('Valor inválido. O valor deve ser um int')
     
     @property
     def nome(self):
@@ -52,7 +52,7 @@ class Pessoa(ABC):
         if isinstance(nome, str):
             self.__nome = nome
         else:
-            print("Valor inválido. O valor deve ser um str")
+            print('Valor inválido. O valor deve ser um str')
     
     @property
     def data_nasc(self):
@@ -63,7 +63,7 @@ class Pessoa(ABC):
         if isinstance(data_nasc, Date):
             self.__data_nasc = data_nasc
         else:
-            print("Valor inválido. O valor deve ser um Date")
+            print('Valor inválido. O valor deve ser um Date')
 
     @property
     def endereco(self):
@@ -74,4 +74,4 @@ class Pessoa(ABC):
         if isinstance(endereco, str):
             self.__endereco = endereco
         else:
-            print("Valor inválido. O valor deve ser um str")
+            print('Valor inválido. O valor deve ser um str')

@@ -9,6 +9,7 @@ class ControladorAdocao:
         self.__controlador_animal = controlador_sistema.controlador_animal
         self.__adocoes = [] # type: ignore
         self.__tela_adocao = TelaAdocao()
+        self.__contador_id = 1
 
     def incluir_adocao(self):
         adotante = None
@@ -27,7 +28,8 @@ class ControladorAdocao:
             animal = self.__controlador_animal.incluir_animal()
         
         dados_adocao = self.__tela_adocao.pega_dados_adocao()
-        nova_adocao = Adocao(adotante, animal, dados_adocao['data'])
+        nova_adocao = Adocao(self.__contador_id, adotante, animal, dados_adocao['data'])
+        self.__contador_id += 1
         self.__adocoes.append(nova_adocao)
         return nova_adocao
     
@@ -37,18 +39,26 @@ class ControladorAdocao:
         adocao = self.pega_adocao_por_numero(numero_adocao)
 
         if adocao is not None:
+            if self.tbm_trocar_adotante():
+                self.__tela_adocao.mostra_mensagem('Cadastre o adotante')
+                novo_adotante = self.__controlador_adotante.incluir_adotante()
+                adocao.adotante = novo_adotante
+
+            if self.tbm_trocar_animal():
+                self.__tela_adocao.mostra_mensagem('Cadastre o animal')
+                novo_animal = self.__controlador_animal.incluir_animal()
+                adocao.animal = novo_animal
             novos_dados = self.__tela_adocao.pega_dados_adocao()
-            adocao.cpf = novos_dados['cpf']
-            adocao.nome = novos_dados['nome']
-            adocao.data_nasc = novos_dados['data_nasc']
-            adocao.endereco = novos_dados['endereco']
+            adocao.data = novos_dados['data']
         else:
-            self.__tela_adocao.mostra_mensagem('ATENÇÃO: adoção não existente')
+            self.__tela_adocao.mostra_mensagem('ATENCAO: adoção não existente')
         self.lista_adocoes()
+        return adocao
 
     def lista_adocoes(self):
         for adocao in self.__adocoes:
-            dados = {'data': adocao.data,
+            dados = {'numero_id': adocao.numero_id,
+                     'data': adocao.data,
                      'animal': adocao.animal,
                      'adotante': adocao.adotante}
             self.__tela_adocao.mostra_adocao(dados)
@@ -67,9 +77,9 @@ class ControladorAdocao:
         
         self.lista_adocoes()
 
-    def pega_adocao_por_numero(self, numero_doacao):
+    def pega_adocao_por_numero(self, numero_id):
         for adocao in self.__adocoes:
-            if adocao.cpf == numero_doacao:
+            if adocao.numero_id == numero_id:
                 return adocao
         return None
 
@@ -78,6 +88,12 @@ class ControladorAdocao:
     
     def ja_tem_animal(self):
         return self.__tela_adocao.ja_tem_animal()
+
+    def tbm_trocar_adotante(self):
+        return self.__tela_adocao.tbm_trocar_adotante()
+    
+    def tbm_trocar_animal(self):
+        return self.__tela_adocao.tbm_trocar_animal()
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_adocao,

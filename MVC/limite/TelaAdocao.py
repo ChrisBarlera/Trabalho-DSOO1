@@ -22,10 +22,11 @@ class TelaAdocao:
         return {'data': data}
     
     def mostra_adocao(self, dados_adocao):
-        print('\nDATA DA ADOÇÃO: ', dados_adocao['data'])
+        print('\nID DA ADOÇÃO: ', dados_adocao['numero_id'])
+        print('DATA DA ADOÇÃO: ', dados_adocao['data'])
 
     def seleciona_adocao(self):
-        numero = int(input('\nNúmero da adoção que deseja selecionar: '))
+        numero = int(input('\nID da adoção que deseja selecionar: '))
         return numero
 
     def ja_tem_adotante(self):
@@ -34,6 +35,14 @@ class TelaAdocao:
     
     def ja_tem_animal(self):
         resposta = bool(int(input('\nAnimal já cadastrado? (1: Sim, 0: Não): ')))
+        return resposta
+    
+    def tbm_trocar_adotante(self):
+        resposta = bool(int(input('\nTambém alterar adotante? (1: Sim, 0: Não): ')))
+        return resposta
+    
+    def tbm_trocar_animal(self):
+        resposta = bool(int(input('\nTambém alterar animal? (1: Sim, 0: Não): ')))
         return resposta
     
     def mostra_mensagem(self, msg):

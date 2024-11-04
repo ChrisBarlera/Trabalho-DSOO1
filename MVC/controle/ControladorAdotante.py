@@ -13,9 +13,7 @@ class ControladorAdotante:
     def incluir_adotante(self):
         habitacao = None
         if self.habitacao_ja_cadastrada():
-            self.__controlador_habitacao.lista_habitacoes()
-            numero = self.__controlador_habitacao.__tela_habitacao.seleciona_habitacao()
-            habitacao = self.__controlador_habitacao.pega_habitacao_por_numero(numero)
+            habitacao = self.__controlador_habitacao.seleciona_habitacao()
         else:
             self.__tela_adotante.mostra_mensagem('Cadastre uma habitação')
             habitacao = self.__controlador_habitacao.incluir_habitacao()
@@ -68,7 +66,7 @@ class ControladorAdotante:
         if adotante is not None:
             self.__adotantes.remove(adotante)
         else:
-            self.__tela_adotante.mostra_mensagem('ATENCAO: adotante não existente')
+            self.__tela_adotante.mostra_mensagem('ATENÇÃO: adotante não existente')
         
         self.lista_adotantes()
 

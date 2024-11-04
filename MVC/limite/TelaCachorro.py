@@ -20,6 +20,10 @@ class TelaCachorro:
         return {'numero_chip': numero_chip, 'nome': nome,
                 'raca': raca, 'tamanho': tamanho}
     
+    def seleciona_cachorro(self):
+        numero = int(input('\nNúmero do cachorro para selecionar: '))
+        return numero
+    
     def mostra_cachorro(self, dados_cachorro):
         print('\nNÚMERO DO CACHORRO: ', dados_cachorro['numero_chip'])
         print('NOME DO CACHORRO: ', dados_cachorro['nome'])

@@ -4,12 +4,18 @@ from entidade.Animal import Animal
 
 
 class Adocao:
-    def __init__(self, adotante: Adotante, animal: Animal, data: Date) -> None:
+    def __init__(self, numero_id: int, adotante: Adotante, animal: Animal, data: Date):
         self.__adotante = None
         self.__animal = None
         self.__data = None
+        self.__numero_id = None
 
         ### Testando tipos das variáveis
+        if isinstance(numero_id, int):
+            self.__numero_id = numero_id
+        else:
+            print('Tipo inválido')
+    
         if isinstance(adotante, Adotante):
             self.__adotante = adotante
         else:
@@ -26,6 +32,17 @@ class Adocao:
             print('Tipo inválido')
 
     @property
+    def numero_id(self):
+        return self.__numero_id
+    
+    @numero_id.setter
+    def numero_id(self, numero_id: int):
+        if isinstance(numero_id, int):
+            self.__numero_id = numero_id
+        else:
+            print('Valor inválido. O valor deve ser um int')
+    
+    @property
     def adotante(self):
         return self.__adotante
     
@@ -34,7 +51,7 @@ class Adocao:
         if isinstance(adotante, Adotante):
             self.__adotante = adotante
         else:
-            print("Valor inválido. O valor deve ser um Adotante")
+            print('Valor inválido. O valor deve ser um Adotante')
     
     @property
     def animal(self):
@@ -45,7 +62,7 @@ class Adocao:
         if isinstance(animal, Animal):
             self.__animal = animal
         else:
-            print("Valor inválido. O valor deve ser um Animal")
+            print('Valor inválido. O valor deve ser um Animal')
     
     @property
     def data(self):
@@ -56,4 +73,4 @@ class Adocao:
         if isinstance(data, Date):
             self.__data = data
         else:
-            print("Valor inválido. O valor deve ser um Date")
+            print('Valor inválido. O valor deve ser um Date')

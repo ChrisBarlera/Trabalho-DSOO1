@@ -18,9 +18,7 @@ class ControladorHabitacao:
         return nova_habitacao
     
     def alterar_habitacao(self):
-        self.lista_habitacoes()
-        numero_habitacao = self.__tela_habitacao.seleciona_habitacao()
-        habitacao = self.pega_habitacao_por_numero(numero_habitacao)
+        habitacao = self.seleciona_habitacao()
 
         if habitacao is not None:
             novos_dados = self.__tela_habitacao.pega_dados_habitacao()
@@ -46,7 +44,7 @@ class ControladorHabitacao:
         if habitacao is not None:
             self.__habitacoes.remove(habitacao)
         else:
-            self.__tela_habitacao.mostra_mensagem('ATENCAO: habitacao não existente')
+            self.__tela_habitacao.mostra_mensagem('ATENÇÃO: habitacao não existente')
         
         self.lista_habitacoes()
 
@@ -55,6 +53,12 @@ class ControladorHabitacao:
             if habitacao.numero == numero_habitacao:
                 return habitacao
         return None
+
+    def seleciona_habitacao(self):
+        self.lista_habitacoes()
+        numero_habitacao =  self.__tela_habitacao.seleciona_habitacao()
+        habitacao = self.pega_habitacao_por_numero(numero_habitacao)
+        return habitacao
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_habitacao,
