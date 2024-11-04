@@ -36,10 +36,12 @@ class ControladorVacinacao:
         self.lista_vacinacoes()
 
     def lista_vacinacoes(self):
-        for vacinacao in self.__vacinacoes:
-            dados = {'numero': vacinacao.numero,
-                     'tipo': vacinacao.tipo,
-                     'tamanho': vacinacao.tamanho}
+        animal = self.__controlador_animal.seleciona_animal()
+        for vacinacao in animal.vacinacoes:
+            dados = {
+                'data': vacinacao.data,
+                'vacina': vacinacao.vacina
+            }
             self.__tela_vacinacao.mostra_vacinacao(dados)
 
     def excluir_vacinacao(self):
