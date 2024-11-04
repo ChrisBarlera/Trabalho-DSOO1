@@ -34,7 +34,7 @@ class Adotante(Pessoa):
     
     @property
     def possui_animais(self):
-        return self.possui_animais
+        return self.__possui_animais
     
     @possui_animais.setter
     def possui_animais(self, possui_animais: bool):

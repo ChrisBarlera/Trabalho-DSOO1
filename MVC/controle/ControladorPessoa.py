@@ -16,8 +16,7 @@ class ControladorPessoa:
         if opcao == 1:
             nova_pessoa = self.__controlador_doador.incluir_doador()
         else:
-            # nova_pessoa = self.__controlador_cachorro.incluir_cachorro()
-            pass
+            nova_pessoa = self.__controlador_adotante.incluir_adotante()
         self.__pessoas.append(nova_pessoa)
     
     def alterar_pessoa(self):
@@ -25,17 +24,15 @@ class ControladorPessoa:
         if opcao == 1:
             self.__controlador_doador.alterar_doador()
         else:
-            # self.__controlador_cachorro.alterar_cachorro()
-            pass
+            self.__controlador_adotante.alterar_adotante()
 
     def lista_pessoas(self):
         opcao = self.__tela_pessoa.decide_mostra_tipo()
 
         if opcao == 1:
-            self.__controlador_doador.lista_doadores() # placeholder
+            self.__controlador_doador.lista_doadores()
         elif opcao == 2:
-            # print(self.__controlador_cachorro.__cachorros) # placeholder
-            pass
+            self.__controlador_adotante.lista_adotantes()
         else:
             # for Pessoa in self.__pessoas:
             #     if isinstance(Pessoa,Gato):
@@ -48,7 +45,7 @@ class ControladorPessoa:
         if opcao == 1:
             self.__controlador_doador.excluir_doador()
         else:
-            # self.__controlador_cachorro.excluir_cachorro()
+            # self.__controlador_adotante.excluir_adotante()
             pass
 
     def abre_tela(self):

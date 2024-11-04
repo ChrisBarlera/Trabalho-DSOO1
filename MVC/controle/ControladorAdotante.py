@@ -17,10 +17,10 @@ class ControladorAdotante:
             numero = self.__controlador_habitacao.__tela_habitacao.seleciona_habitacao()
             habitacao = self.__controlador_habitacao.pega_habitacao_por_numero(numero)
         else:
-            self.__tela_adotante.mostra_adotante('Cadastre uma habitação')
+            self.__tela_adotante.mostra_mensagem('Cadastre uma habitação')
             habitacao = self.__controlador_habitacao.incluir_habitacao()
 
-        self.__tela_adotante.mostra_adotante('Cadastre o adotante')
+        self.__tela_adotante.mostra_mensagem('Cadastre o adotante')
         dados_adotante = self.__tela_adotante.pega_dados_adotante()
         novo_adotante = Adotante(dados_adotante['cpf'], 
                         dados_adotante['nome'],
