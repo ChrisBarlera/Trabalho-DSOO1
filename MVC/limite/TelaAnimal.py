@@ -5,6 +5,7 @@ class TelaAnimal:
         print('2 - Alterar Animal')
         print('3 - Listar Animais')
         print('4 - Excluir Animal')
+        print('5 - Vacinar Animal')
         print('0 - Retornar')
         
         opcao = int(input('Escolha a opção: '))
@@ -43,10 +44,12 @@ class TelaAnimal:
         print('1 - Gato')
         print('2 - Cachorro')
         print('3 - Todos')
+        opcao = int(input('Escolha a opção: '))
+        return opcao
     
     def seleciona_animal(self):
         cpf = int(input('\nCPF do animal para selecionar: '))
         return cpf
 
-        opcao = int(input('Escolha a opção: '))
-        return opcao
+    def mostra_mensagem(self, msg):
+        print(f'\n{msg}')

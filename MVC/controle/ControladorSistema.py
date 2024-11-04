@@ -7,6 +7,7 @@ from controle.ControladorAdotante import ControladorAdotante
 from controle.ControladorAdocao import ControladorAdocao
 from controle.ControladorDoacao import ControladorDoacao
 from controle.ControladorHabitacao import ControladorHabitacao
+from controle.ControladorVacinacao import ControladorVacinacao
 from limite.TelaSistema import TelaSistema
 
 
@@ -19,6 +20,7 @@ class ControladorSistema:
         self.__controlador_gato = ControladorGato(self)
         self.__controlador_cachorro = ControladorCachorro(self)
         self.__controlador_animal = ControladorAnimal(self)
+        self.__controlador_vacinacao = ControladorVacinacao(self)
         self.__controlador_doador = ControladorDoador(self)
         self.__controlador_habitacao = ControladorHabitacao(self)
         self.__controlador_adotante = ControladorAdotante(self)
@@ -39,6 +41,7 @@ class ControladorSistema:
                         3: self.acessar_adocao,
                         4: self.acessar_doacao,
                         5: self.acessar_habitacao,
+                        6: self.acessar_vacinacao,
                         0: self.encerra_sistema}
 
         while True:
@@ -60,6 +63,9 @@ class ControladorSistema:
     
     def acessar_habitacao(self):
         self.__controlador_habitacao.abre_tela()
+    
+    def acessar_vacinacao(self):
+        self.__controlador_vacinacao.abre_tela()
     
     @property
     def controlador_gato(self):
@@ -96,3 +102,7 @@ class ControladorSistema:
     @property
     def controlador_habitacao(self):
         return self.__controlador_habitacao
+    
+    @property
+    def controlador_vacinacao(self):
+        return self.__controlador_vacinacao

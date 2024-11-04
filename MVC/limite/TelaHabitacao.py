@@ -1,6 +1,6 @@
 class TelaHabitacao:
     def tela_opcoes(self):
-        print('\n-------- Habitacao ----------')
+        print('\n-------- HABITAÇÃO ----------')
         print('1 - Incluir Habitação')
         print('2 - Alterar Habitação')
         print('3 - Listar Habitações')

@@ -7,6 +7,7 @@ class ControladorAnimal:
         self.__controlador_sistema = controlador_sistema
         self.__controlador_gato = controlador_sistema.controlador_gato
         self.__controlador_cachorro = controlador_sistema.controlador_cachorro
+        # self.__controlador_vacinacao = controlador_sistema.controlador_vacinacao
         self.__animais = [] # type: ignore # E se eu fizer uma matriz Nx2?
         self.__tela_animal = TelaAnimal()
 
@@ -67,6 +68,7 @@ class ControladorAnimal:
                         2: self.alterar_animal,
                         3: self.lista_animais,
                         4: self.excluir_animal,
+                        5: self.vacinar_animal,
                         0: self.retornar}
 
         while True:
@@ -74,3 +76,7 @@ class ControladorAnimal:
     
     def retornar(self):
         self.__controlador_sistema.abre_tela()
+
+    @property
+    def animais(self):
+        return self.__animais

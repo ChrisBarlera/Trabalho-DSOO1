@@ -7,6 +7,7 @@ class TelaSistema:
         print('3 - Adoções')
         print('4 - Doações')
         print('5 - Habitações')
+        print('6 - Vacinações')
         print('0 - Finalizar sistema')
         opcao = int(input('Escolha a opção: '))
         return opcao

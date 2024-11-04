@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from entidade.Vacinacao import Vacina, Vacinacao
 from datetime import date as Date
 
 
@@ -10,7 +9,7 @@ class Animal(ABC):
         self.__numero_chip = None
         self.__nome = None
         self.__raca = None
-        self.__vacinacoes = [] # type: list[Vacinacao]
+        self.__vacinacoes = [] # type: ignore
 
         ### Testando tipos das variáveis
         if isinstance(numero_chip, int):
@@ -69,12 +68,3 @@ class Animal(ABC):
     @property
     def vacinacoes(self):
         return self.__vacinacoes
-
-    def vacinar(self, data: Date, vacina: Vacina) -> Vacinacao:
-        if isinstance(data, Date) and isinstance(vacina, Vacina):
-            nova_vacinacao = Vacinacao(data, self, vacina)
-            self.__vacinacoes.append(nova_vacinacao)
-            return nova_vacinacao
-        else:
-            print('Tipo inválido')
-            return None
