@@ -84,6 +84,12 @@ class ControladorDoacao:
             if doacao.numero_id == numero_id:
                 return doacao
         return None
+    
+    def pessoa_ja_doou(self, cpf_busca):
+        for doacao in self.__doacoes:
+            if doacao.doador.cpf == cpf_busca:
+                return True
+        return False
 
     def ja_tem_doador(self):
         return self.__tela_doacao.ja_tem_doador()

@@ -16,7 +16,7 @@ class TelaDoador:
         print('\n-------- DADOS DOADOR ----------')
         cpf = int(input('CPF: '))
         nome = input('Nome: ')
-        raw_data_nasc = input('Data de Nascimento (Formato dd/mm/2024): ').split('/')
+        raw_data_nasc = input('Data de Nascimento (Formato dd/mm/yyyy): ').split('/')
         data_dict = {'day': int(raw_data_nasc[0]),
                      'month': int(raw_data_nasc[1]),
                      'year': int(raw_data_nasc[2])}

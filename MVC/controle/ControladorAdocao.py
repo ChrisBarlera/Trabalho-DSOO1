@@ -7,6 +7,7 @@ class ControladorAdocao:
         self.__controlador_sistema = controlador_sistema
         self.__controlador_adotante = controlador_sistema.controlador_adotante
         self.__controlador_animal = controlador_sistema.controlador_animal
+        self.__controlador_doacao = controlador_sistema.controlador_doacao
         self.__adocoes = [] # type: ignore
         self.__tela_adocao = TelaAdocao()
         self.__contador_id = 1
@@ -17,21 +18,30 @@ class ControladorAdocao:
         
         if self.ja_tem_adotante():
             adotante = self.__controlador_adotante.seleciona_adotante()
+
+            # REGRA DE JA DOADOR
+            if self.__controlador_doacao.pessoa_ja_doou(adotante.cpf):
+                self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
+                return None
         else:
+            # REGRA DE JA DOADOR
+            if self.__controlador_doacao.pessoa_ja_doou(adotante.cpf):
+                self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
+                return None
             self.__tela_adocao.mostra_mensagem('Cadastre um adotante')
             adotante = self.__controlador_adotante.incluir_adotante()
 
         # REGRA DE IDADE
-        if adotante.calcula_idade() < 18:
-            self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
-            return None
+        # if adotante.calcula_idade() < 18:
+        #     self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
+        #     return None
         
         # REGRA DE VACINA DO ANIMAL NA ADOCAO
         if self.ja_tem_animal():
             animal = self.__controlador_animal.seleciona_animal()
-            if len(animal.vacinacoes) < 3:
-                self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
-                return None
+            # if len(animal.vacinacoes) < 3:
+            #     self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
+            #     return None
         else:
             ## se o animal não está cadastrado, ele certamente não está vacinado
             self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')

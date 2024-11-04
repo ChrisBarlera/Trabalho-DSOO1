@@ -25,8 +25,8 @@ class ControladorSistema:
         self.__controlador_habitacao = ControladorHabitacao(self)
         self.__controlador_adotante = ControladorAdotante(self)
         self.__controlador_pessoa = ControladorPessoa(self)
-        self.__controlador_adocao = ControladorAdocao(self)
         self.__controlador_doacao = ControladorDoacao(self)
+        self.__controlador_adocao = ControladorAdocao(self)
     
     def inicializa_sistema(self):
         self.abre_tela()
