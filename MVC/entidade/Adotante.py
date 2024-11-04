@@ -1,7 +1,6 @@
 from datetime import date as Date
-from Pessoa import Pessoa
-from Habitacao import Habitacao
-from Adocao import Adocao
+from entidade.Pessoa import Pessoa
+from entidade.Habitacao import Habitacao
 
 
 class Adotante(Pessoa):
@@ -31,7 +30,7 @@ class Adotante(Pessoa):
         if isinstance(habitacao, Habitacao):
             self.__habitacao = habitacao
         else:
-            print("Valor inválido. O valor deve ser um Habitacao")
+            print('Valor inválido. O valor deve ser um Habitacao')
     
     @property
     def possui_animais(self):
@@ -42,7 +41,7 @@ class Adotante(Pessoa):
         if isinstance(possui_animais, bool):
             self.possui_animais = possui_animais
         else:
-            print("Valor inválido. O valor deve ser um bool")
+            print('Valor inválido. O valor deve ser um bool')
 
     def calcula_idade(self):
         hoje = Date.today()

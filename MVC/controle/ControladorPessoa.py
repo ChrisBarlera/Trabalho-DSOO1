@@ -1,12 +1,13 @@
 from limite.TelaPessoa import TelaPessoa
 from controle.ControladorDoador import ControladorDoador
-
+from controle.ControladorAdotante import ControladorAdotante
 
 class ControladorPessoa:
 
     def __init__(self, controlador_sistema) -> None:
         self.__controlador_sistema = controlador_sistema
         self.__controlador_doador = ControladorDoador(controlador_sistema)
+        self.__controlador_adotante = ControladorAdotante(controlador_sistema)
         self.__pessoas = [] # type: ignore # E se eu fizer uma matriz Nx2?
         self.__tela_pessoa = TelaPessoa()
 
