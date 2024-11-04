@@ -63,6 +63,11 @@ class ControladorDoador:
         self.lista_doadores()
         cpf = self.__tela_doador.seleciona_doador()
         return self.pega_doador_por_cpf(cpf)
+    
+    def mostra_doador_especifico(self, doador):
+        dados = {'nome': doador.nome,
+                 'cpf': doador.cpf}
+        self.__tela_doador.mostra_doador_especifico(dados)
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_doador,

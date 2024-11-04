@@ -62,10 +62,10 @@ class ControladorDoacao:
             dados = {'numero_id': doacao.numero_id,
                      'data': doacao.data,
                      'animal': doacao.animal,
-                     'adotante': doacao.adotante}
+                     'doador': doacao.doador}
             self.__tela_doacao.mostra_doacao(dados)
             self.__controlador_animal.mostra_animal_especifico(dados['animal'])
-            self.__controlador_doador.mostra_doador_especifico(dados['adotante'])
+            self.__controlador_doador.mostra_doador_especifico(dados['doador'])
 
     def excluir_doacao(self):
         self.lista_doacoes()

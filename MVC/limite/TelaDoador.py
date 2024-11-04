@@ -36,5 +36,9 @@ class TelaDoador:
         numero = int(input('\nCPF do doador que deseja selecionar: '))
         return numero
     
+    def mostra_doador_especifico(self, dados_doador):
+        print('NOME DO DOADOR:', dados_doador['nome'])
+        print('CPF DO DOADOR:', dados_doador['cpf'])
+
     def mostra_mensagem(self, msg):
         print(msg)
