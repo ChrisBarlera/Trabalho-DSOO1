@@ -28,6 +28,7 @@ class ControladorCachorro:
             cachorro.numero_chip = novos_dados['numero_chip']
             cachorro.nome = novos_dados['nome']
             cachorro.raca = novos_dados['raca']
+            cachorro.tamanho = novos_dados['tamanho']
         else:
             self.__tela_cachorro.mostra_mensagem('ATENCAO: cachorro não existente')
         self.lista_cachorros()
