@@ -20,7 +20,10 @@ class TelaVacinacao:
                      'month': int(raw_data_nasc[1]),
                      'year': int(raw_data_nasc[2])}
         data = Date(**data_dict)
-        vacina = input('Nome da vacina: ')
+        print('Vacina 1: Raiva')
+        print('Vacina 2: Leptospirose')
+        print('Vacina 3: Hepatite Infecciosa')
+        vacina = int(input('Escolha uma vacina: '))
         return {'data': data, 'vacina': vacina}
     
     def mostra_vacinacao(self, dados_vacinacao):

@@ -8,7 +8,7 @@ from datetime import date as Date
 
 class Vacinacao:
     # def __init__(self, data: Date, animal: Animal, vacina: str) -> None:
-    def __init__(self, data: Date, animal, vacina: str) -> None:
+    def __init__(self, data: Date, animal, vacina: int) -> None:
         self.__data = None
         self.__animal = animal
         self.__vacina = None
@@ -24,7 +24,7 @@ class Vacinacao:
         # else:
         #     print('Tipo inválido')
 
-        if isinstance(vacina, str):
+        if isinstance(vacina, int):
             self.__vacina = vacina
         else:
             print('Tipo inválido')
@@ -38,7 +38,7 @@ class Vacinacao:
         if isinstance(data, Date):
             self.__data = data
         else:
-            print("Valor inválido. O valor deve ser um Date")
+            print('Valor inválido. O valor deve ser um Date')
 
     @property
     def animal(self):
@@ -49,15 +49,15 @@ class Vacinacao:
     #     if isinstance(animal, Animal):
     #         self.__animal = animal
     #     else:
-    #         print("Valor inválido. O valor deve ser um Animal")
+    #         print('Valor inválido. O valor deve ser um Animal')
 
     @property
     def vacina(self):
         return self.__vacina
     
     @vacina.setter
-    def vacina(self, vacina: str):
-        if isinstance(vacina, str):
+    def vacina(self, vacina: int):
+        if isinstance(vacina, int):
             self.__vacina = vacina
         else:
-            print("Valor inválido. O valor deve ser um str")
+            print('Valor inválido. O valor deve ser um int')
