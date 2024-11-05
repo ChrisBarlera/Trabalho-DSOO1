@@ -25,12 +25,12 @@ class ControladorAdocao:
                 self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
                 return None
         else:
+            self.__tela_adocao.mostra_mensagem('Cadastre um adotante')
+            adotante = self.__controlador_adotante.incluir_adotante()
             # REGRA DE JA DOADOR
             if self.__controlador_doacao.pessoa_ja_doou(adotante.cpf):
                 self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
                 return None
-            self.__tela_adocao.mostra_mensagem('Cadastre um adotante')
-            adotante = self.__controlador_adotante.incluir_adotante()
 
 
         # REGRA DE IDADE

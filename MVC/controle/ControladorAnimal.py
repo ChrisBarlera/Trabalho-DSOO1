@@ -66,12 +66,12 @@ class ControladorAnimal:
     def tem_todas_vacinas(self, animal):
         cont = 0
         feitas = set()
-        for vacinacao in animal.vanicacoes:
+        for vacinacao in animal.vacinacoes:
             if vacinacao.vacina not in feitas:
                 cont += 1
                 feitas.add(vacinacao.vacina)
         
-        if feitas == 3:
+        if cont == 3:
             return True
         else:
             return False
