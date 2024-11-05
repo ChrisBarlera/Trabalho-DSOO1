@@ -24,9 +24,18 @@ class TelaHabitacao:
         return {'numero': numero, 'tipo': tipo, 'tamanho': tamanho}
     
     def mostra_habitacao(self, dados_habitacao):
+        mapa_tamanhos = {
+            1: 'Pequeno',
+            2: 'Médio',
+            3: 'Grande',
+        }
+        mapa_tipos = {
+            1: 'Casa',
+            2: 'Apartamento'
+        }
         print('\nNÚMERO DA HABITAÇÃO: ', dados_habitacao['numero'])
-        print('TIPO DA HABITAÇÃO: ', dados_habitacao['tipo'])
-        print('TAMANHO DA HABITAÇÃO: ', dados_habitacao['tamanho'])
+        print('TIPO DA HABITAÇÃO: ', mapa_tipos[dados_habitacao['tipo']])
+        print('TAMANHO DA HABITAÇÃO: ', mapa_tamanhos[dados_habitacao['tamanho']])
 
     def seleciona_habitacao(self):
         numero = int(input('\nNúmero da habitação para selecionar: '))

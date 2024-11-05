@@ -28,7 +28,12 @@ class TelaCachorro:
         return numero
     
     def mostra_cachorro(self, dados_cachorro):
+        mapa_de_tamanhos = {
+            1: 'Pequeno',
+            2: 'Médio',
+            3: 'Grande'
+        }
         print('\nNÚMERO DO CACHORRO: ', dados_cachorro['numero_chip'])
         print('NOME DO CACHORRO: ', dados_cachorro['nome'])
         print('RACA DO CACHORRO: ', dados_cachorro['raca'])
-        print('TAMANHO DO CACHORRO: ', dados_cachorro['tamanho'])
+        print('TAMANHO DO CACHORRO: ', mapa_de_tamanhos[dados_cachorro['tamanho']])

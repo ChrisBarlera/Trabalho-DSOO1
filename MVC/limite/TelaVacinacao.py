@@ -27,8 +27,13 @@ class TelaVacinacao:
         return {'data': data, 'vacina': vacina}
     
     def mostra_vacinacao(self, dados_vacinacao):
+        mapa_vacinas = {
+            1: 'Raiva',
+            2: 'Leptospirose',
+            3: 'Hepatite Infecciosa'
+        }
         print('\nDATA DA VACINAÇÃO: ', dados_vacinacao['data'])
-        print('NOME DA VACINA: ', dados_vacinacao['vacina'])
+        print('NOME DA VACINA: ', mapa_vacinas[dados_vacinacao['vacina']])
 
     def seleciona_vacinacao(self):
         numero = int(input('\nNúmero da vacinação para selecionar: '))
