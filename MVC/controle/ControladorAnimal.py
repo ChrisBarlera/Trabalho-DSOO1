@@ -63,6 +63,19 @@ class ControladorAnimal:
                  'raca': animal.raca}
         self.__tela_animal.mostra_animal_especifico(dados)
 
+    def tem_todas_vacinas(self, animal):
+        cont = 0
+        feitas = set()
+        for vacinacao in animal.vanicacoes:
+            if vacinacao.vacina not in feitas:
+                cont += 1
+                feitas.add(vacinacao.vacina)
+        
+        if feitas == 3:
+            return True
+        else:
+            return False
+
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_animal,
                         2: self.alterar_animal,

@@ -41,7 +41,7 @@ class ControladorAdocao:
         # REGRA DE VACINA DO ANIMAL NA ADOCAO
         if self.ja_tem_animal():
             animal = self.__controlador_animal.seleciona_animal()
-            if len(animal.vacinacoes) < 3:
+            if not self.__controlador_animal.tem_todas_vacinas(animal):
                 self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
                 return None
         else:
