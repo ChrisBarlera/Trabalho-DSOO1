@@ -1,5 +1,6 @@
 from limite.TelaCachorro import TelaCachorro
 from entidade.Cachorro import Cachorro
+from DAOs.CachorroDAO import CachorroDAO
 
 
 class ControladorCachorro:
@@ -8,6 +9,11 @@ class ControladorCachorro:
         self.__controlador_sistema = controlador_sistema
         self.__cachorros = [] # type: ignore
         self.__tela_cachorro = TelaCachorro()
+        self.__cachorro_DAO = CachorroDAO()
+        try:
+            self.__cachorros =  self.__cachorro_DAO.get_all()
+        except:
+            pass
 
     def incluir_cachorro(self):
         dados_cachorro = self.__tela_cachorro.pega_dados_cachorro()
@@ -16,6 +22,7 @@ class ControladorCachorro:
                          dados_cachorro['raca'],
                          dados_cachorro['tamanho'])
         self.__cachorros.append(novo_cachorro)
+        self.__cachorro_DAO.add(novo_cachorro)
         return novo_cachorro
     
     def alterar_cachorro(self):
@@ -34,12 +41,15 @@ class ControladorCachorro:
         self.lista_cachorros()
 
     def lista_cachorros(self):
+        lista_dados = []
         for cachorro in self.__cachorros:
             dados = {'numero_chip': cachorro.numero_chip,
                      'nome': cachorro.nome,
                      'raca': cachorro.raca,
                      'tamanho': cachorro.tamanho}
-            self.__tela_cachorro.mostra_cachorro(dados)
+            lista_dados.append(dados)
+        
+        self.__tela_cachorro.mostra_todos_cachorros(lista_dados)
 
     def excluir_cachorro(self):
         self.lista_cachorros()

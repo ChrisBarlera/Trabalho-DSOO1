@@ -28,18 +28,12 @@ class ControladorAnimal:
             self.__controlador_cachorro.alterar_cachorro()
 
     def lista_animais(self):
-        opcao = self.__tela_animal.decide_mostra_tipo()
+        opcao = self.__tela_animal.decide_tipo_animal()
 
         if opcao == 1:
             self.__controlador_gato.lista_gatos() # placeholder
         elif opcao == 2:
             self.__controlador_cachorro.lista_cachorros()
-        else:
-            # for animal in self.__animais:
-            #     if isinstance(animal,Gato):
-            #         self.__controlador_gato.lista_gatos()
-            print(self.__animais) # placeholder
-        
 
     def excluir_animal(self):
         opcao = self.__tela_animal.decide_tipo_animal()

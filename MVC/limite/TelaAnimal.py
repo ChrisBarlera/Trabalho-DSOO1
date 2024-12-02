@@ -1,36 +1,57 @@
-class TelaAnimal:
-    def tela_opcoes(self):
-        print('\n-------- ANIMAL ----------')
-        print('1 - Incluir Animal')
-        print('2 - Alterar Animal')
-        print('3 - Listar Animais')
-        print('4 - Excluir Animal')
-        print('0 - Retornar')
-        
-        opcao = int(input('Escolha a opção: '))
-        return opcao
-    
-    def pega_dados_animal(self):
-        tipo = self.decide_tipo_animal()
-        print('\n-------- DADOS ANIMAL ----------')
-        numero_chip = int(input('Número do chip: '))
-        nome = input('Nome: ')
-        raca = input('Raça: ')
+import PySimpleGUI as sg
 
-        if tipo == 2: # Tipo Cachorro
-            tamanho = input('Tamanho: ')
-            return {'numero_chip': numero_chip,
-                    'nome': nome, 'raca': raca, 'tamanho': tamanho}
-        else:
-            return {'numero_chip': numero_chip, 'nome': nome, 'raca': raca}
+
+class TelaAnimal:
+
+    def __init__(self) -> None:
+        self.__window = None
+        sg.ChangeLookAndFeel('DarkGreen2')
+
+    def tela_opcoes(self):
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [
+            [sg.Text('Animais',size=(20,1), font=titulo)],
+            [
+                sg.Button('Incluir', size=20, font=botao_font),
+                sg.Button('Alterar', size=20, font=botao_font),
+                sg.Button('Listar', size=20, font=botao_font),
+                sg.Button('Excluir', size=20, font=botao_font)
+            ],
+            [sg.Button('Retornar', size=20, font=botao_font)]
+        ]
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
+        
+        retorno, values = self.open()
+        dicionario = {
+            'Incluir' : 1,
+            'Alterar' : 2,
+            'Listar' : 3,
+            'Excluir' : 4,
+            'Retornar' : 0
+        }
+        self.close()
+        return dicionario[retorno]        
     
     def decide_tipo_animal(self):
-        print('\n-------- TIPO ANIMAL ----------')
-        print('1 - Gato')
-        print('2 - Cachorro')
-
-        opcao = int(input('Escolha a opção: '))
-        return opcao
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [
+            [sg.Text('Escolha o tipo:',size=(20,1), font=titulo)],
+            [
+                sg.Button('Gato', size=20, font=botao_font),
+                sg.Button('Cachorro', size=20, font=botao_font)
+            ]
+        ]
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
+        
+        retorno, values = self.open()
+        dicionario = {
+            'Gato' : 1,
+            'Cachorro' : 2
+        }
+        self.close()
+        return dicionario[retorno]
 
     def mostra_animal_especifico(self, dados_animal):
         print('NOME DO ANIMAL:', dados_animal['nome'])
@@ -50,5 +71,12 @@ class TelaAnimal:
         cpf = int(input('\nCPF do animal para selecionar: '))
         return cpf
 
-    def mostra_mensagem(self, msg):
-        print(f'\n{msg}')
+    def mostra_mensagem(self, mensagem: str, titulo='Mensagem'):
+        sg.Popup(titulo, mensagem)
+
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values
+    
+    def close(self):
+        self.__window.Close()
