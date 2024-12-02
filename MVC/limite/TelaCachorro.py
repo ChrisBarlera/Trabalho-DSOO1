@@ -2,6 +2,11 @@ import PySimpleGUI as sg
 
 
 class TelaCachorro:
+
+    def __init__(self) -> None:
+        self.__window = None
+        sg.ChangeLookAndFeel('DarkGreen2')
+
     def tela_opcoes(self):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
@@ -57,24 +62,34 @@ class TelaCachorro:
             self.mostra_mensagem('Preenchimento inválido dos dados!')
             self.close()
             self.pega_dados_cachorro()
-
-
+        self.close()
         return values
     
     def seleciona_cachorro(self):
         numero = int(input('\nNúmero do cachorro para selecionar: '))
         return numero
     
+    def mostra_todos_cachorros(self, lista):
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [
+            [sg.Text('Cachorros cadastrados',size=(20,1), font=titulo)]
+        ]
+        for cachorro in lista:
+            layout.append(self.mostra_cachorro(cachorro))
+            layout.append([sg.Text('-------------------------------------------')])
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
+        
+        retorno, values = self.open()
+
     def mostra_cachorro(self, dados_cachorro):
-        mapa_de_tamanhos = {
-            1: 'Pequeno',
-            2: 'Médio',
-            3: 'Grande'
-        }
-        print('\nNÚMERO DO CACHORRO: ', dados_cachorro['numero_chip'])
-        print('NOME DO CACHORRO: ', dados_cachorro['nome'])
-        print('RACA DO CACHORRO: ', dados_cachorro['raca'])
-        print('TAMANHO DO CACHORRO: ', mapa_de_tamanhos[dados_cachorro['tamanho']])
+        dog_layout = [
+            [sg.Text(f'Número: {dados_cachorro['numero_chip']}')],
+            [sg.Text(f'Nome: {dados_cachorro['nome']}')],
+            [sg.Text(f'Raça: {dados_cachorro['raca']}')],
+            [sg.Text(f'Tamanho: {dados_cachorro['tamanho']}')]
+        ]
+        return dog_layout
 
     def mostra_mensagem(self, mensagem: str, titulo='Mensagem'):
         sg.Popup(titulo, mensagem)

@@ -34,12 +34,15 @@ class ControladorCachorro:
         self.lista_cachorros()
 
     def lista_cachorros(self):
+        lista_dados = []
         for cachorro in self.__cachorros:
             dados = {'numero_chip': cachorro.numero_chip,
                      'nome': cachorro.nome,
                      'raca': cachorro.raca,
                      'tamanho': cachorro.tamanho}
-            self.__tela_cachorro.mostra_cachorro(dados)
+            lista_dados.append(dados)
+        
+        self.__tela_cachorro.mostra_todos_cachorros(lista_dados)
 
     def excluir_cachorro(self):
         self.lista_cachorros()
