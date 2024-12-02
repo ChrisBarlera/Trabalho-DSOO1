@@ -1,27 +1,65 @@
+import PySimpleGUI as sg
+
+
 class TelaCachorro:
     def tela_opcoes(self):
-        print('\n-------- CACHORRO ----------')
-        print('1 - Incluir cachorro')
-        print('2 - Alterar cachorro')
-        print('3 - Listar cachorros')
-        print('4 - Excluir cachorro')
-        print('0 - Retornar')
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [
+            [sg.Text('Cachorro',size=(20,1), font=titulo)],
+            [
+                sg.Button('Incluir', size=20, font=botao_font),
+                sg.Button('Alterar', size=20, font=botao_font),
+                sg.Button('Listar', size=20, font=botao_font),
+                sg.Button('Excluir', size=20, font=botao_font)
+            ],
+            [sg.Button('Retornar', size=20, font=botao_font)]
+        ]
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         
-        opcao = int(input('Escolha a opção: '))
-        return opcao
+        retorno, values = self.open()
+        dicionario = {
+            'Incluir' : 1,
+            'Alterar' : 2,
+            'Listar' : 3,
+            'Excluir' : 4,
+            'Retornar' : 0
+        }
+        self.close()
+        return dicionario[retorno]
     
     def pega_dados_cachorro(self):
-        print('\n-------- DADOS CACHORRO ----------')
-        numero_chip = int(input('Número do chip: '))
-        nome = input('Nome: ')
-        raca = input('Raça: ')
-        print('Tamanho 1: Pequeno')
-        print('Tamanho 2: Médio')
-        print('Tamanho 3: Grande')
-        tamanho = int(input('Escolha um tamanho: '))
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [
+            [sg.Text('Insira os dados',size=(20,1), font=titulo)],
+            [sg.Text('Número do chip', size=20, font=botao_font),
+             sg.Input('Ex.: 123', size=20, font=('Helvetica', 15), key='numero_chip')],
+            [sg.Text('Nome do animal', size=20, font=botao_font),
+             sg.Input('Ex.: Fulaninho', size=20, font=('Helvetica', 15), key='nome')],
+            [sg.Text('Raça', size=20, font=botao_font),
+             sg.Input('Ex.: Uma Raça', size=20, font=('Helvetica', 15), key='raca')],
+            [sg.Text('Tamanho/Porte', size=20, font=botao_font), sg.Combo((
+                'Pequeno',
+                'Médio',
+                'Grande'
+            ), font=('Helvetica', 15), size=20, readonly=True, key='tamanho')],
+            [sg.Ok(size=20, font=botao_font)]
+        ]
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
+        button, values = self.open()
 
-        return {'numero_chip': numero_chip, 'nome': nome,
-                'raca': raca, 'tamanho': tamanho}
+        try:
+            values['numero_chip'] = int(values['numero_chip'])
+            if values['tamanho'] == '':
+                raise ValueError
+        except ValueError:
+            self.mostra_mensagem('Preenchimento inválido dos dados!')
+            self.close()
+            self.pega_dados_cachorro()
+
+
+        return values
     
     def seleciona_cachorro(self):
         numero = int(input('\nNúmero do cachorro para selecionar: '))
@@ -37,3 +75,13 @@ class TelaCachorro:
         print('NOME DO CACHORRO: ', dados_cachorro['nome'])
         print('RACA DO CACHORRO: ', dados_cachorro['raca'])
         print('TAMANHO DO CACHORRO: ', mapa_de_tamanhos[dados_cachorro['tamanho']])
+
+    def mostra_mensagem(self, mensagem: str, titulo='Mensagem'):
+        sg.Popup(titulo, mensagem)
+
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values
+    
+    def close(self):
+        self.__window.Close()

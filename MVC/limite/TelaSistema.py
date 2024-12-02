@@ -26,7 +26,7 @@ class TelaSistema:
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
         layout = [
-            [sg.Text('Escolha seu menu',size=(20,1), font=titulo)],
+            [sg.Text('Escolha seu menu:',size=(20,1), font=titulo)],
             [
                 sg.Button('Animais', size=20, font=botao_font),
                 sg.Button('Pessoas', size=20, font=botao_font),
