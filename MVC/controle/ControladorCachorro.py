@@ -26,7 +26,7 @@ class ControladorCachorro:
         return novo_cachorro
     
     def alterar_cachorro(self):
-        self.lista_cachorros()
+        self.lista_cachorros(seleciona=True)
         numero_cachorro = self.__tela_cachorro.seleciona_cachorro()
         cachorro = self.pega_cachorro_por_numero(numero_cachorro)
 
@@ -40,7 +40,7 @@ class ControladorCachorro:
             self.__tela_cachorro.mostra_mensagem('ATENCAO: cachorro não existente')
         self.lista_cachorros()
 
-    def lista_cachorros(self):
+    def lista_cachorros(self, seleciona=False):
         lista_dados = []
         for cachorro in self.__cachorros:
             dados = {'numero_chip': cachorro.numero_chip,
@@ -49,10 +49,10 @@ class ControladorCachorro:
                      'tamanho': cachorro.tamanho}
             lista_dados.append(dados)
         
-        self.__tela_cachorro.mostra_todos_cachorros(lista_dados)
+        self.__tela_cachorro.mostra_todos_cachorros(lista_dados, seleciona)
 
     def excluir_cachorro(self):
-        self.lista_cachorros()
+        self.lista_cachorros(seleciona=True)
         numero_cachorro = self.__tela_cachorro.seleciona_cachorro()
         cachorro = self.pega_cachorro_por_numero(numero_cachorro)
 
