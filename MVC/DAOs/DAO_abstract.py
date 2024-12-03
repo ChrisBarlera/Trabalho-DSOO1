@@ -4,7 +4,8 @@ import pickle
 
 class DAO(ABC):
     def __init__(self, datasource):
-        self.__datasource = '../backup_files/'+datasource
+        # self.__datasource = '../backup_files/'+datasource #Para rodar no terminal
+        self.__datasource = 'backup_files/'+datasource # Para debugar/rodar no vscode
         self.__cache = dict()
         try:
             self.__load()

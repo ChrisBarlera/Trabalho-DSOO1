@@ -11,7 +11,7 @@ class ControladorCachorro:
         self.__tela_cachorro = TelaCachorro()
         self.__cachorro_DAO = CachorroDAO()
         try:
-            self.__cachorros =  self.__cachorro_DAO.get_all()
+            self.__cachorros = list(self.__cachorro_DAO.get_all())
         except:
             pass
 
@@ -26,8 +26,7 @@ class ControladorCachorro:
         return novo_cachorro
     
     def alterar_cachorro(self):
-        self.lista_cachorros(seleciona=True)
-        numero_cachorro = self.__tela_cachorro.seleciona_cachorro()
+        numero_cachorro = self.lista_cachorros(seleciona=True)
         cachorro = self.pega_cachorro_por_numero(numero_cachorro)
 
         if cachorro is not None:
@@ -37,7 +36,7 @@ class ControladorCachorro:
             cachorro.raca = novos_dados['raca']
             cachorro.tamanho = novos_dados['tamanho']
         else:
-            self.__tela_cachorro.mostra_mensagem('ATENCAO: cachorro não existente')
+            self.__tela_cachorro.mostra_mensagem('ATENÇÃO: cachorro não existente')
         self.lista_cachorros()
 
     def lista_cachorros(self, seleciona=False):
@@ -49,7 +48,7 @@ class ControladorCachorro:
                      'tamanho': cachorro.tamanho}
             lista_dados.append(dados)
         
-        self.__tela_cachorro.mostra_todos_cachorros(lista_dados, seleciona)
+        return self.__tela_cachorro.mostra_todos_cachorros(lista_dados, seleciona)
 
     def excluir_cachorro(self):
         self.lista_cachorros(seleciona=True)
@@ -59,7 +58,7 @@ class ControladorCachorro:
         if cachorro is not None:
             self.__cachorros.remove(cachorro)
         else:
-            self.__tela_cachorro.mostra_mensagem('ATENCAO: cachorro não existente')
+            self.__tela_cachorro.mostra_mensagem('ATENÇÃO: cachorro não existente')
         
         self.lista_cachorros()
 

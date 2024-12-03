@@ -65,10 +65,6 @@ class TelaCachorro:
         self.close()
         return values
     
-    def seleciona_cachorro(self):
-        numero = int(input('\nNúmero do cachorro para selecionar: '))
-        return numero
-    
     def mostra_todos_cachorros(self, lista, selecionar=False):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
@@ -76,7 +72,7 @@ class TelaCachorro:
         if selecionar:
             for cachorro in lista:
                 layout.append(self.mostra_cachorro(cachorro))
-                layout.append([sg.Button('Selecionar')])
+                layout.append([sg.Button(f'Selecionar {cachorro['numero_chip']}')])
                 layout.append([sg.Text('-------------------------------------------')])
         else:
             for cachorro in lista:
@@ -84,6 +80,9 @@ class TelaCachorro:
                 layout.append([sg.Text('-------------------------------------------')])
         self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         retorno, values = self.open()
+        retorno = int(retorno[11::])
+        self.close()
+        return retorno
 
     def mostra_cachorro(self, dados_cachorro):
         dog_layout = [
