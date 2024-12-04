@@ -30,6 +30,7 @@ class ControladorCachorro:
         cachorro = self.pega_cachorro_por_numero(numero_cachorro)
 
         if cachorro is not None:
+            self.__cachorro_DAO.remove(cachorro.numero_chip)
             novos_dados = self.__tela_cachorro.pega_dados_cachorro()
             cachorro.numero_chip = novos_dados['numero_chip']
             cachorro.nome = novos_dados['nome']
@@ -37,6 +38,7 @@ class ControladorCachorro:
             cachorro.tamanho = novos_dados['tamanho']
         else:
             self.__tela_cachorro.mostra_mensagem('ATENÇÃO: cachorro não existente')
+        self.__cachorro_DAO.add(cachorro)
         self.lista_cachorros()
 
     def lista_cachorros(self, seleciona=False):
