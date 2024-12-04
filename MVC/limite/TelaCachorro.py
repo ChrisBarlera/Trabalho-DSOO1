@@ -5,7 +5,6 @@ class TelaCachorro:
 
     def __init__(self) -> None:
         self.__window = None
-        sg.ChangeLookAndFeel('DarkGreen2')
 
     def tela_opcoes(self):
         titulo = ('Helvetica', 30)

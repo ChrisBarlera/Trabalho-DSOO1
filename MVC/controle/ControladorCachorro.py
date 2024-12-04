@@ -47,7 +47,6 @@ class ControladorCachorro:
                      'raca': cachorro.raca,
                      'tamanho': cachorro.tamanho}
             lista_dados.append(dados)
-        
         return self.__tela_cachorro.mostra_todos_cachorros(lista_dados, seleciona)
 
     def excluir_cachorro(self):
@@ -55,10 +54,11 @@ class ControladorCachorro:
         cachorro = self.pega_cachorro_por_numero(numero_cachorro)
 
         if cachorro is not None:
+            self.__cachorro_DAO.remove(cachorro.numero_chip)
             self.__cachorros.remove(cachorro)
         else:
             self.__tela_cachorro.mostra_mensagem('ATENÇÃO: cachorro não existente')
-        
+
         self.lista_cachorros()
 
     def pega_cachorro_por_numero(self, numero_cachorro):

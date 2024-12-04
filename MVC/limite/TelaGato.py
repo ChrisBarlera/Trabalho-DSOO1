@@ -1,49 +1,96 @@
-# import PySimpleGUI as sg 
- 
-# # Very basic window.  Return values as a dictionary 
- 
-# layout = [ 
-#             [sg.Text('Please enter your Name, Address, Phone')], 
-#             [sg.Text('Name', size=(15, 1)), sg.InputText('name', key='name')],
-#             [sg.Text('Address', size=(15, 1)), sg.InputText('address', key='address')], 
-#             [sg.Text('Phone', size=(15, 1)), sg.InputText('phone', key='phone')], 
-#             [sg.Submit(), sg.Cancel()] 
-#          ] 
- 
-# window = sg.Window('Simple data entry GUI').Layout(layout) 
- 
-# button, values = window.Read() 
- 
-# print(values['name'], values['address'], values['phone'])
+import PySimpleGUI as sg
+
 
 class TelaGato:
+
+    def __init__(self) -> None:
+        self.__window = None
+
     def tela_opcoes(self):
-        print('\n-------- GATO ----------')
-        print('1 - Incluir Gato')
-        print('2 - Alterar Gato')
-        print('3 - Listar Gatos')
-        print('4 - Excluir Gato')
-        print('0 - Retornar')
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [
+            [sg.Text('Gato',size=(20,1), font=titulo)],
+            [
+                sg.Button('Incluir', size=20, font=botao_font),
+                sg.Button('Alterar', size=20, font=botao_font),
+                sg.Button('Listar', size=20, font=botao_font),
+                sg.Button('Excluir', size=20, font=botao_font)
+            ],
+            [sg.Button('Retornar', size=20, font=botao_font)]
+        ]
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         
-        opcao = int(input('Escolha a opção: '))
-        return opcao
+        retorno, values = self.open()
+        dicionario = {
+            'Incluir' : 1,
+            'Alterar' : 2,
+            'Listar' : 3,
+            'Excluir' : 4,
+            'Retornar' : 0
+        }
+        self.close()
+        return dicionario[retorno]
     
     def pega_dados_gato(self):
-        print('\n-------- DADOS GATO ----------')
-        numero_chip = int(input('Número do chip: '))
-        nome = input('Nome: ')
-        raca = input('Raça: ')
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [
+            [sg.Text('Insira os dados',size=(20,1), font=titulo)],
+            [sg.Text('Número do chip', size=20, font=botao_font),
+             sg.Input('Ex.: 123', size=20, font=('Helvetica', 15), key='numero_chip')],
+            [sg.Text('Nome do animal', size=20, font=botao_font),
+             sg.Input('Ex.: Fulaninho', size=20, font=('Helvetica', 15), key='nome')],
+            [sg.Text('Raça', size=20, font=botao_font),
+             sg.Input('Ex.: Uma Raça', size=20, font=('Helvetica', 15), key='raca')],
+            [sg.Ok(size=20, font=botao_font)]
+        ]
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
+        button, values = self.open()
 
-        return {'numero_chip': numero_chip, 'nome': nome, 'raca': raca}
+        try:
+            values['numero_chip'] = int(values['numero_chip'])
+        except:
+            self.mostra_mensagem('Preenchimento inválido dos dados!')
+            self.close()
+            self.pega_dados_gato()
+        self.close()
+        return values
     
+    def mostra_todos_gatos(self, lista, selecionar=False):
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [[sg.Text('Gatos cadastrados',size=(20,1), font=titulo)]]
+        if selecionar:
+            for gato in lista:
+                layout.append(self.mostra_gato(gato))
+                layout.append([sg.Button(f'Selecionar {gato['numero_chip']}')])
+                layout.append([sg.Text('-------------------------------------------')])
+        else:
+            for gato in lista:
+                layout.append(self.mostra_gato(gato))
+                layout.append([sg.Text('-------------------------------------------')])
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
+        retorno, values = self.open()
+        if selecionar:
+            retorno = int(retorno[11::])
+        self.close()
+        return retorno
+
     def mostra_gato(self, dados_gato):
-        print('\nNUMERO DO GATO: ', dados_gato['numero_chip'])
-        print('NOME DO GATO: ', dados_gato['nome'])
-        print('RACA DO GATO: ', dados_gato['raca'])
-
-    def seleciona_gato(self):
-        numero = int(input('\nNúmero do gato para selecionar: '))
-        return numero
+        cat_layout = [
+            [sg.Text(f'Número: {dados_gato['numero_chip']}')],
+            [sg.Text(f'Nome: {dados_gato['nome']}')],
+            [sg.Text(f'Raça: {dados_gato['raca']}')]
+        ]
+        return cat_layout
     
-    def mostra_mensagem(self, msg):
-        print(msg)
+    def mostra_mensagem(self, mensagem: str, titulo='Mensagem'):
+        sg.Popup(titulo, mensagem)
+
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values
+    
+    def close(self):
+        self.__window.Close()
