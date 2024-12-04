@@ -80,7 +80,8 @@ class TelaCachorro:
                 layout.append([sg.Text('-------------------------------------------')])
         self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         retorno, values = self.open()
-        retorno = int(retorno[11::])
+        if selecionar:
+            retorno = int(retorno[11::])
         self.close()
         return retorno
 

@@ -51,8 +51,7 @@ class ControladorCachorro:
         return self.__tela_cachorro.mostra_todos_cachorros(lista_dados, seleciona)
 
     def excluir_cachorro(self):
-        self.lista_cachorros(seleciona=True)
-        numero_cachorro = self.__tela_cachorro.seleciona_cachorro()
+        numero_cachorro = self.lista_cachorros(seleciona=True)
         cachorro = self.pega_cachorro_por_numero(numero_cachorro)
 
         if cachorro is not None:
@@ -67,12 +66,6 @@ class ControladorCachorro:
             if cachorro.numero_chip == numero_cachorro:
                 return cachorro
         return None
-
-    def seleciona_cachorro(self):
-        self.lista_cachorros()
-        numero_cachorro =  self.__tela_cachorro.seleciona_cachorro()
-        cachorro = self.pega_cachorro_por_numero(numero_cachorro)
-        return cachorro
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_cachorro,
