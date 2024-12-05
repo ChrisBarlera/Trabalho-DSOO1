@@ -1,5 +1,6 @@
 from limite.TelaHabitacao import TelaHabitacao
 from entidade.Habitacao import Habitacao
+from DAOs.HabitacaoDAO import HabitacaoDAO
 
 
 class ControladorHabitacao:
@@ -8,6 +9,7 @@ class ControladorHabitacao:
         self.__controlador_sistema = controlador_sistema
         self.__habitacoes = [] # type: ignore
         self.__tela_habitacao = TelaHabitacao()
+        self.__habitacao_DAO = HabitacaoDAO()
         
     def incluir_habitacao(self):
         dados_habitacao = self.__tela_habitacao.pega_dados_habitacao()
@@ -15,26 +17,32 @@ class ControladorHabitacao:
                          dados_habitacao['tipo'],
                          dados_habitacao['tamanho'])
         self.__habitacoes.append(nova_habitacao)
+        self.__habitacao_DAO.add(nova_habitacao)
         return nova_habitacao
     
     def alterar_habitacao(self):
-        habitacao = self.seleciona_habitacao()
+        numero_hab = self.lista_habitacoes(seleciona=True)
+        habitacao = self.pega_habitacao_por_numero(numero_hab)
 
         if habitacao is not None:
+            self.__habitacao_DAO.remove(habitacao.numero)
             novos_dados = self.__tela_habitacao.pega_dados_habitacao()
             habitacao.numero = novos_dados['numero']
             habitacao.tipo = novos_dados['tipo']
             habitacao.tamanho = novos_dados['tamanho']
         else:
-            self.__tela_habitacao.mostra_mensagem('ATENCAO: habitação não existente')
+            self.__tela_habitacao.mostra_mensagem('ATENÇÃO: habitação não existente')
+        self.__habitacao_DAO.add(habitacao)
         self.lista_habitacoes()
 
     def lista_habitacoes(self):
+        lista_dados = []
         for habitacao in self.__habitacoes:
             dados = {'numero': habitacao.numero,
                      'tipo': habitacao.tipo,
                      'tamanho': habitacao.tamanho}
-            self.__tela_habitacao.mostra_habitacao(dados)
+            lista_dados.append(dados)
+        return self.__tela_habitacao.mostra_todas_habitacoes(lista_dados, seleciona)
 
     def excluir_habitacao(self):
         self.lista_habitacoes()
@@ -42,6 +50,7 @@ class ControladorHabitacao:
         habitacao = self.pega_habitacao_por_numero(numero_habitacao)
 
         if habitacao is not None:
+            self.__habitacao_DAO.remove(habitacao.numero)
             self.__habitacoes.remove(habitacao)
         else:
             self.__tela_habitacao.mostra_mensagem('ATENÇÃO: habitacao não existente')
@@ -53,12 +62,6 @@ class ControladorHabitacao:
             if habitacao.numero == numero_habitacao:
                 return habitacao
         return None
-
-    def seleciona_habitacao(self):
-        self.lista_habitacoes()
-        numero_habitacao =  self.__tela_habitacao.seleciona_habitacao()
-        habitacao = self.pega_habitacao_por_numero(numero_habitacao)
-        return habitacao
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_habitacao,
