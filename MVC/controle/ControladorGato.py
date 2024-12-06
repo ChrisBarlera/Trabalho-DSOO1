@@ -33,9 +33,9 @@ class ControladorGato:
             gato.numero_chip = novos_dados['numero_chip']
             gato.nome = novos_dados['nome']
             gato.raca = novos_dados['raca']
+            self.__gato_DAO.add(gato)
         else:
             self.__tela_gato.mostra_mensagem('ATENCAO: gato não existente')
-        self.__gato_DAO.add(gato)
         self.lista_gatos()
 
     def lista_gatos(self, seleciona=False):

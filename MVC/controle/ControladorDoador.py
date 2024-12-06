@@ -1,5 +1,6 @@
 from limite.TelaDoador import TelaDoador
 from entidade.Doador import Doador
+from DAOs.DoadorDAO import DoadorDAO
 
 
 class ControladorDoador:
@@ -8,6 +9,11 @@ class ControladorDoador:
         self.__controlador_sistema = controlador_sistema
         self.__doadores = [] # type: ignore
         self.__tela_doador = TelaDoador()
+        self.__doador_DAO = DoadorDAO()
+        try:
+            self.__doadores = list(self.__doador_DAO.get_all())
+        except:
+            pass
 
     def incluir_doador(self):
         dados_doador = self.__tela_doador.pega_dados_doador()
@@ -16,6 +22,7 @@ class ControladorDoador:
                          dados_doador['data_nasc'],
                          dados_doador['endereco'])
         self.__doadores.append(novo_doador)
+        self.__gato_DAO.add(novo_gato)
         return novo_doador
     
     def alterar_doador(self):
@@ -24,13 +31,15 @@ class ControladorDoador:
         doador = self.pega_doador_por_cpf(numero_doador)
 
         if doador is not None:
+            self.__doador_DAO.remove(doador.cpf)
             novos_dados = self.__tela_doador.pega_dados_doador()
             doador.cpf = novos_dados['cpf']
             doador.nome = novos_dados['nome']
             doador.data_nasc = novos_dados['data_nasc']
             doador.endereco = novos_dados['endereco']
+            self.__doador_DAO.add(doador)
         else:
-            self.__tela_doador.mostra_mensagem('ATENCAO: doador não existente')
+            self.__tela_doador.mostra_mensagem('ATENÇÃO: doador não existente')
         self.lista_doadores()
 
     def lista_doadores(self):
@@ -47,9 +56,10 @@ class ControladorDoador:
         doador = self.pega_doador_por_cpf(numero_doador)
 
         if doador is not None:
+            self.__daodor_DAO.remove(daodor.cpf)
             self.__doadores.remove(doador)
         else:
-            self.__tela_doador.mostra_mensagem('ATENCAO: doador não existente')
+            self.__tela_doador.mostra_mensagem('ATENÇÃO: doador não existente')
         
         self.lista_doadores()
 
