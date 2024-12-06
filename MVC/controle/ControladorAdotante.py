@@ -1,6 +1,7 @@
 from limite.TelaAdotante import TelaAdotante
 from entidade.Adotante import Adotante
 from controle.ControladorHabitacao import ControladorHabitacao
+from DAOs.AdotanteDAO import AdotanteDAO
 
 
 class ControladorAdotante:
@@ -9,11 +10,16 @@ class ControladorAdotante:
         self.__controlador_habitacao = controlador_sistema.controlador_habitacao
         self.__adotantes = [] # type: ignore
         self.__tela_adotante = TelaAdotante()
+        self.__adotante_DAO = AdotanteDAO()
+        try:
+            self.__adotantes = list(self.__adotante_DAO.get_all())
+        except:
+            pass
 
     def incluir_adotante(self):
         habitacao = None
         if self.habitacao_ja_cadastrada():
-            habitacao = self.__controlador_habitacao.seleciona_habitacao()
+            habitacao = self.__controlador_habitacao.lista_habitacoes(seleciona=True)
         else:
             self.__tela_adotante.mostra_mensagem('Cadastre uma habitação')
             habitacao = self.__controlador_habitacao.incluir_habitacao()
@@ -27,6 +33,7 @@ class ControladorAdotante:
                         habitacao,
                         dados_adotante['possui_animais'])
         self.__adotantes.append(novo_adotante)
+        self.__adotante_DAO.add(novo_adotante)
         return novo_adotante
 
     def alterar_adotante(self):
@@ -35,6 +42,7 @@ class ControladorAdotante:
         adotante = self.pega_adotante_por_cpf(numero_adotante)
 
         if adotante is not None:
+            self.__adotante_DAO.remove(adotante.cpf)
             if self.tbm_trocar_habitacao():
                 nova_hab = self.__controlador_habitacao.incluir_habitacao()
                 adotante.habitacao = nova_hab
@@ -44,8 +52,9 @@ class ControladorAdotante:
             adotante.data_nasc = novos_dados['data_nasc']
             adotante.endereco = novos_dados['endereco']
             adotante.possui_animais = novos_dados['possui_animais']
+            self.__adotante_DAO.add(adotante)
         else:
-            self.__tela_adotante.mostra_mensagem('ATENCAO: adotante não existente')
+            self.__tela_adotante.mostra_mensagem('ATENÇÃO: adotante não existente')
         self.lista_adotantes()
 
     def lista_adotantes(self):
@@ -64,10 +73,10 @@ class ControladorAdotante:
         adotante = self.pega_adotante_por_cpf(numero_adotante)
 
         if adotante is not None:
+            self.__adotante_DAO.remove(adotante.cpf)
             self.__adotantes.remove(adotante)
         else:
             self.__tela_adotante.mostra_mensagem('ATENÇÃO: adotante não existente')
-        
         self.lista_adotantes()
 
     def pega_adotante_por_cpf(self, cpf_adotante):

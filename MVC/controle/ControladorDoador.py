@@ -56,7 +56,7 @@ class ControladorDoador:
         doador = self.pega_doador_por_cpf(cpf_doador)
 
         if doador is not None:
-            self.__daodor_DAO.remove(daodor.cpf)
+            self.__doador_DAO.remove(doador.cpf)
             self.__doadores.remove(doador)
         else:
             self.__tela_doador.mostra_mensagem('ATENÇÃO: doador não existente')
