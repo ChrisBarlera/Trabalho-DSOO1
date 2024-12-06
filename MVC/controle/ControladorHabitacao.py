@@ -10,6 +10,10 @@ class ControladorHabitacao:
         self.__habitacoes = [] # type: ignore
         self.__tela_habitacao = TelaHabitacao()
         self.__habitacao_DAO = HabitacaoDAO()
+        try:
+            self.__habitacoes = list(self.__habitacao_DAO.get_all())
+        except:
+            pass
         
     def incluir_habitacao(self):
         dados_habitacao = self.__tela_habitacao.pega_dados_habitacao()
@@ -30,12 +34,12 @@ class ControladorHabitacao:
             habitacao.numero = novos_dados['numero']
             habitacao.tipo = novos_dados['tipo']
             habitacao.tamanho = novos_dados['tamanho']
+            self.__habitacao_DAO.add(habitacao)
         else:
             self.__tela_habitacao.mostra_mensagem('ATENÇÃO: habitação não existente')
-        self.__habitacao_DAO.add(habitacao)
         self.lista_habitacoes()
 
-    def lista_habitacoes(self):
+    def lista_habitacoes(self, seleciona=False):
         lista_dados = []
         for habitacao in self.__habitacoes:
             dados = {'numero': habitacao.numero,

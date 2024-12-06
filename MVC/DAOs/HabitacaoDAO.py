@@ -6,9 +6,9 @@ class HabitacaoDAO(DAO):
         super().__init__('habitacao.pkl')
 
     def add(self, habitacao: Habitacao):
-        if (isinstance(habitacao.numero_chip, int)) and (habitacao is not None) \
+        if (isinstance(habitacao.numero, int)) and (habitacao is not None) \
             and (isinstance(habitacao, Habitacao)):
-            super().add(habitacao.numero_chip, habitacao)
+            super().add(habitacao.numero, habitacao)
 
     def get(self, key: int):
         if isinstance(key, int):
