@@ -6,9 +6,9 @@ class DoadorDAO(DAO):
         super().__init__('doador.pkl')
 
     def add(self, doador: Doador):
-        if (isinstance(doador.numero_chip, int)) and (doador is not None) \
+        if (isinstance(doador.cpf, int)) and (doador is not None) \
             and (isinstance(doador, Doador)):
-            super().add(doador.numero_chip, doador)
+            super().add(doador.cpf, doador)
 
     def get(self, key: int):
         if isinstance(key, int):

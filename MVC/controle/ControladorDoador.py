@@ -22,13 +22,12 @@ class ControladorDoador:
                          dados_doador['data_nasc'],
                          dados_doador['endereco'])
         self.__doadores.append(novo_doador)
-        self.__gato_DAO.add(novo_gato)
+        self.__doador_DAO.add(novo_doador)
         return novo_doador
     
     def alterar_doador(self):
-        self.lista_doadores()
-        numero_doador = self.__tela_doador.seleciona_doador()
-        doador = self.pega_doador_por_cpf(numero_doador)
+        cpf_doador = self.lista_doadores(seleciona=True)
+        doador = self.pega_doador_por_cpf(cpf_doador)
 
         if doador is not None:
             self.__doador_DAO.remove(doador.cpf)
@@ -42,25 +41,25 @@ class ControladorDoador:
             self.__tela_doador.mostra_mensagem('ATENÇÃO: doador não existente')
         self.lista_doadores()
 
-    def lista_doadores(self):
+    def lista_doadores(self, seleciona=False):
+        lista_dados = []
         for doador in self.__doadores:
             dados = {'cpf': doador.cpf,
                      'nome': doador.nome,
                      'data_nasc': doador.data_nasc,
                      'endereco': doador.endereco}
-            self.__tela_doador.mostra_doador(dados)
+            lista_dados.append(dados)
+        return self.__tela_doador.mostra_todos_doadores(lista_dados, seleciona)
 
     def excluir_doador(self):
-        self.lista_doadores()
-        numero_doador = self.__tela_doador.seleciona_doador()
-        doador = self.pega_doador_por_cpf(numero_doador)
+        cpf_doador = self.lista_doadores(seleciona=True)
+        doador = self.pega_doador_por_cpf(cpf_doador)
 
         if doador is not None:
             self.__daodor_DAO.remove(daodor.cpf)
             self.__doadores.remove(doador)
         else:
             self.__tela_doador.mostra_mensagem('ATENÇÃO: doador não existente')
-        
         self.lista_doadores()
 
     def pega_doador_por_cpf(self, cpf_doador):
@@ -68,11 +67,6 @@ class ControladorDoador:
             if doador.cpf == cpf_doador:
                 return doador
         return None
-    
-    def seleciona_doador(self):
-        self.lista_doadores()
-        cpf = self.__tela_doador.seleciona_doador()
-        return self.pega_doador_por_cpf(cpf)
     
     def mostra_doador_especifico(self, doador):
         dados = {'nome': doador.nome,
