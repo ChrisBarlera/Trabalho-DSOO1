@@ -1,5 +1,6 @@
 from limite.TelaAdocao import TelaAdocao
 from entidade.Adocao import Adocao
+from DAOs.AdocaoDAO import AdocaoDAO
 
 
 class ControladorAdocao:
@@ -11,6 +12,7 @@ class ControladorAdocao:
         self.__controlador_cachorro = controlador_sistema.controlador_cachorro
         self.__adocoes = [] # type: ignore
         self.__tela_adocao = TelaAdocao()
+        self.__adocao_DAO = AdocaoDAO()
         self.__contador_id = 1
 
     def incluir_adocao(self):

@@ -112,8 +112,8 @@ class TelaAdotante:
         
         retorno, values = self.open()
         dicionario = {
-            'Sim' : 1,
-            'Não' : 0
+            'Sim' : True,
+            'Não' : False
         }
         self.close()
         return dicionario[retorno]

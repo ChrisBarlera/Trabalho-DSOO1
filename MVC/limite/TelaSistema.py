@@ -13,7 +13,7 @@ class TelaSistema:
         dicionario = {
             'Animais' : 1,
             'Pessoas' : 2,
-            'Adoçoes' : 3,
+            'Adoções' : 3,
             'Doações' : 4,
             'Habitações' : 5,
             'Vacinações' : 6
