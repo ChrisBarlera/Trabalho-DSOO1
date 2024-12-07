@@ -65,14 +65,37 @@ class TelaAdotante:
             self.pega_dados_adotante()
         self.close()
         return values
+
+    def mostra_todos_adotantes(self, lista, selecionar=False):
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [[sg.Text('Adotantes cadastrados',size=(20,1), font=titulo)]]
+        if selecionar:
+            for adotante in lista:
+                layout.append(self.mostra_adotante(adotante))
+                layout.append([sg.Button(f'Selecionar {adotante['cpf']}')])
+                layout.append([sg.Text('-------------------------------------------')])
+        else:
+            for adotante in lista:
+                layout.append(self.mostra_adotante(adotante))
+                layout.append([sg.Text('-------------------------------------------')])
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
+        retorno, values = self.open()
+        if selecionar:
+            retorno = int(retorno[11::])
+        self.close()
+        return retorno
     
     def mostra_adotante(self, dados_adotante):
-        print('\nCPF DO ADOTANTE: ', dados_adotante['cpf'])
-        print('NOME DO ADOTANTE: ', dados_adotante['nome'])
-        print('DATA DE NASCIMENTO DO ADOTANTE: ', dados_adotante['data_nasc'])
-        print('ENDEREÇO DO ADOTANTE: ', dados_adotante['endereco'])
-        print('NÚEMERO DA HABITAÇÃO DO ADOTANTE: ', dados_adotante['habitacao'].numero)
-        print('ADOTANTE POSSUI ANIMAIS?: ', dados_adotante['possui_animais'])
+        adotante_layout = [
+            [sg.Text(f'CPF: {dados_adotante['cpf']}')],
+            [sg.Text(f'Nome: {dados_adotante['nome']}')],
+            [sg.Text(f'Data de Nascimento: {dados_adotante['data_nasc']}')],
+            [sg.Text(f'Endereço: {dados_adotante['endereco']}')],
+            [sg.Text(f'Número habitação: {dados_adotante['habitacao'].numero}')],
+            [sg.Text(f'Já possui animais? {dados_adotante['possui_animais']}')]
+        ]
+        return adotante_layout
     
     def habitacao_ja_cadastrada(self):
         titulo = ('Helvetica', 30)

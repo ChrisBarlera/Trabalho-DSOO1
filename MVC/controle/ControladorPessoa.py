@@ -31,13 +31,8 @@ class ControladorPessoa:
 
         if opcao == 1:
             self.__controlador_doador.lista_doadores()
-        elif opcao == 2:
-            self.__controlador_adotante.lista_adotantes()
         else:
-            # for Pessoa in self.__pessoas:
-            #     if isinstance(Pessoa,Gato):
-            #         self.__controlador_doador.lista_gatos()
-            print(self.__pessoas) # placeholder
+            self.__controlador_adotante.lista_adotantes()
         
 
     def excluir_pessoa(self):

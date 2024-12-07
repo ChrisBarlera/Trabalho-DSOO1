@@ -19,7 +19,8 @@ class ControladorAdotante:
     def incluir_adotante(self):
         habitacao = None
         if self.habitacao_ja_cadastrada():
-            habitacao = self.__controlador_habitacao.lista_habitacoes(seleciona=True)
+            numero = self.__controlador_habitacao.lista_habitacoes(seleciona=True)
+            habitacao = self.__controlador_habitacao.pega_habitacao_por_numero(numero)
         else:
             self.__tela_adotante.mostra_mensagem('Cadastre uma habitação')
             habitacao = self.__controlador_habitacao.incluir_habitacao()
@@ -37,9 +38,8 @@ class ControladorAdotante:
         return novo_adotante
 
     def alterar_adotante(self):
-        self.lista_adotantes()
-        numero_adotante = self.__tela_adotante.seleciona_adotante()
-        adotante = self.pega_adotante_por_cpf(numero_adotante)
+        cpf_adotante = self.lista_adotantes(seleciona=True)
+        adotante = self.pega_adotante_por_cpf(cpf_adotante)
 
         if adotante is not None:
             self.__adotante_DAO.remove(adotante.cpf)
@@ -57,7 +57,8 @@ class ControladorAdotante:
             self.__tela_adotante.mostra_mensagem('ATENÇÃO: adotante não existente')
         self.lista_adotantes()
 
-    def lista_adotantes(self):
+    def lista_adotantes(self, seleciona=False):
+        lista_dados = []
         for adotante in self.__adotantes:
             dados = {'cpf': adotante.cpf,
                      'nome': adotante.nome,
@@ -65,12 +66,12 @@ class ControladorAdotante:
                      'endereco': adotante.endereco,
                      'habitacao': adotante.habitacao,
                      'possui_animais': adotante.possui_animais}
-            self.__tela_adotante.mostra_adotante(dados)
+            lista_dados.append(dados)
+        return self.__tela_adotante.mostra_todos_adotantes(lista_dados, seleciona)
 
     def excluir_adotante(self):
-        self.lista_adotantes()
-        numero_adotante = self.__tela_adotante.seleciona_adotante()
-        adotante = self.pega_adotante_por_cpf(numero_adotante)
+        cpf_adotante = self.lista_adotantes(seleciona=True)
+        adotante = self.pega_adotante_por_cpf(cpf_adotante)
 
         if adotante is not None:
             self.__adotante_DAO.remove(adotante.cpf)
