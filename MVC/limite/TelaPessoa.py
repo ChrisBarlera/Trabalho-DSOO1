@@ -52,16 +52,6 @@ class TelaPessoa:
         self.close()
         return dicionario[retorno]
 
-    def decide_mostra_tipo(self):
-        print('\n-------- TIPO PESSOA ----------')
-        print('Temos as seguintes listas:')
-        print('1 - Doador')
-        print('2 - Adotante')
-        print('3 - Todos')
-
-        opcao = int(input('Escolha a opção: '))
-        return opcao
-
     def mostra_mensagem(self, mensagem: str, titulo='Mensagem'):
         sg.Popup(titulo, mensagem)
 

@@ -27,7 +27,7 @@ class ControladorPessoa:
             self.__controlador_adotante.alterar_adotante()
 
     def lista_pessoas(self):
-        opcao = self.__tela_pessoa.decide_mostra_tipo()
+        opcao = self.__tela_pessoa.decide_tipo_pessoa()
 
         if opcao == 1:
             self.__controlador_doador.lista_doadores()
