@@ -60,14 +60,12 @@ class ControladorAnimal:
         self.__tela_animal.mostra_animal_especifico(dados)
 
     def tem_todas_vacinas(self, animal):
-        cont = 0
         feitas = set()
         for vacinacao in animal.vacinacoes:
             if vacinacao.vacina not in feitas:
-                cont += 1
                 feitas.add(vacinacao.vacina)
         
-        if cont == 3:
+        if len(feitas) == 3:
             return True
         else:
             return False

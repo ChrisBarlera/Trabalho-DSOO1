@@ -6,7 +6,7 @@ class VacinacaoDAO(DAO):
         super().__init__('vacinacao.pkl')
 
     def add(self, vacinacao: Vacinacao):
-        if (isinstance(vacinacao.numero_chip, int)) and (vacinacao is not None) \
+        if (isinstance(vacinacao.contador_id, int)) and (vacinacao is not None) \
             and (isinstance(vacinacao, Vacinacao)):
             super().add(vacinacao.contador_id, vacinacao)
 

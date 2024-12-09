@@ -68,3 +68,10 @@ class Animal(ABC):
     @property
     def vacinacoes(self):
         return self.__vacinacoes
+    
+    @vacinacoes.setter
+    def vacinacoes(self, vacinacoes: list):
+        if isinstance(vacinacoes, list):
+            self.__vacinacoes = vacinacoes
+        else:
+            print("Valor inválido. O valor deve ser um list")

@@ -16,7 +16,8 @@ class TelaSistema:
             'Adoções' : 3,
             'Doações' : 4,
             'Habitações' : 5,
-            'Vacinações' : 6
+            'Vacinações' : 6,
+            'Fechar': 0
         }
         self.close()
         return dicionario[retorno]
@@ -36,7 +37,8 @@ class TelaSistema:
                 sg.Button('Doações', size=20, font=botao_font),
                 sg.Button('Habitações', size=20, font=botao_font),
                 sg.Button('Vacinações', size=20, font=botao_font)
-            ]
+            ],
+            [sg.Button('Fechar', size=30, font=botao_font)]
         ]
         self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
 

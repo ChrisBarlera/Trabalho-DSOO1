@@ -52,7 +52,6 @@ class TelaCachorro:
         ]
         self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         button, values = self.open()
-
         try:
             values['numero_chip'] = int(values['numero_chip'])
             if values['tamanho'] == '':
