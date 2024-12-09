@@ -75,13 +75,20 @@ class TelaAdocao:
     def ja_tem_adotante(self):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
+        # layout = [
+        #     [sg.Text('Adotante já cadastrado?',size=(20,1), font=titulo)],
+        #     [
+        #         sg.Button('Sim', size=20, font=botao_font),
+        #         sg.Button('Não', size=20, font=botao_font)
+        #     ],
+        #     [sg.Button('Retornar', size=20, font=botao_font)]
+        # ]
         layout = [
             [sg.Text('Adotante já cadastrado?',size=(20,1), font=titulo)],
             [
                 sg.Button('Sim', size=20, font=botao_font),
                 sg.Button('Não', size=20, font=botao_font)
-            ],
-            [sg.Button('Retornar', size=20, font=botao_font)]
+            ]
         ]
         self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         
@@ -96,13 +103,20 @@ class TelaAdocao:
     def ja_tem_animal(self):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
+        # layout = [
+        #     [sg.Text('Animal já cadastrado?',size=(20,1), font=titulo)],
+        #     [
+        #         sg.Button('Sim', size=20, font=botao_font),
+        #         sg.Button('Não', size=20, font=botao_font)
+        #     ],
+        #     [sg.Button('Retornar', size=20, font=botao_font)]
+        # ]
         layout = [
             [sg.Text('Animal já cadastrado?',size=(20,1), font=titulo)],
             [
                 sg.Button('Sim', size=20, font=botao_font),
                 sg.Button('Não', size=20, font=botao_font)
-            ],
-            [sg.Button('Retornar', size=20, font=botao_font)]
+            ]
         ]
         self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         
@@ -117,13 +131,20 @@ class TelaAdocao:
     def tbm_trocar_adotante(self):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
+        # layout = [
+        #     [sg.Text('Também alterar adotante?',size=(20,1), font=titulo)],
+        #     [
+        #         sg.Button('Sim', size=20, font=botao_font),
+        #         sg.Button('Não', size=20, font=botao_font)
+        #     ],
+        #     [sg.Button('Retornar', size=20, font=botao_font)]
+        # ]
         layout = [
             [sg.Text('Também alterar adotante?',size=(20,1), font=titulo)],
             [
                 sg.Button('Sim', size=20, font=botao_font),
                 sg.Button('Não', size=20, font=botao_font)
-            ],
-            [sg.Button('Retornar', size=20, font=botao_font)]
+            ]
         ]
         self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         
@@ -138,13 +159,20 @@ class TelaAdocao:
     def tbm_trocar_animal(self):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
+        # layout = [
+        #     [sg.Text('Também alterar animal?',size=(20,1), font=titulo)],
+        #     [
+        #         sg.Button('Sim', size=20, font=botao_font),
+        #         sg.Button('Não', size=20, font=botao_font)
+        #     ],
+        #     [sg.Button('Retornar', size=20, font=botao_font)]
+        # ]
         layout = [
             [sg.Text('Também alterar animal?',size=(20,1), font=titulo)],
             [
                 sg.Button('Sim', size=20, font=botao_font),
                 sg.Button('Não', size=20, font=botao_font)
-            ],
-            [sg.Button('Retornar', size=20, font=botao_font)]
+            ]
         ]
         self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         

@@ -45,9 +45,11 @@ class ControladorAnimal:
     def seleciona_animal(self):
         opcao = self.__tela_animal.decide_tipo_animal()
         if opcao == 1:
-            animal = self.__controlador_gato.seleciona_gato()
+            numero = self.__controlador_gato.lista_gatos(seleciona=True)
+            animal = self.__controlador_gato.pega_gato_por_numero(numero)
         else:
-            animal = self.__controlador_cachorro.seleciona_cachorro()
+            numero = self.__controlador_cachorro.lista_cachorros(seleciona=True)
+            animal = self.__controlador_cachorro.pega_cachorro_por_numero(numero)
         return animal
 
     def mostra_animal_especifico(self, animal):

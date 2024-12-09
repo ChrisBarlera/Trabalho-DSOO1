@@ -20,43 +20,43 @@ class ControladorAdocao:
         animal = None
         
         if self.ja_tem_adotante():
-            adotante = self.__controlador_adotante.seleciona_adotante()
+            cpf = self.__controlador_adotante.lista_adotantes(seleciona=True)
+            adotante = self.__controlador_adotante.pega_adotante_por_cpf(cpf)
 
             # REGRA DE JA DOADOR
             if self.__controlador_doacao.pessoa_ja_doou(adotante.cpf):
-                self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
-                return None
+                self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar (já doou antes)')
+                return self.incluir_adocao()
         else:
             self.__tela_adocao.mostra_mensagem('Cadastre um adotante')
             adotante = self.__controlador_adotante.incluir_adotante()
             # REGRA DE JA DOADOR
             if self.__controlador_doacao.pessoa_ja_doou(adotante.cpf):
-                self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
-                return None
-
+                self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar (já doou antes)')
+                return self.incluir_adocao()
 
         # REGRA DE IDADE
         if adotante.calcula_idade() < 18:
-            self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar')
-            return None
+            self.__tela_adocao.mostra_mensagem('Esta pessoa não pode adotar (idade insuficiente)')
+            return self.incluir_adocao()
         
         # REGRA DE VACINA DO ANIMAL NA ADOCAO
         if self.ja_tem_animal():
             animal = self.__controlador_animal.seleciona_animal()
             if not self.__controlador_animal.tem_todas_vacinas(animal):
                 self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
-                return None
+                return self.incluir_adocao()
         else:
             ## se o animal não está cadastrado, ele certamente não está vacinado
             self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
-            return None
+            return self.incluir_adocao()
         
         # REGRA DE CACHORRO GRANDE E AP PEQUENO
         if animal.especie == 'CACHORRO':
             if (animal.tamanho == 3 and adotante.habitacao.tamanho == 1
                 and adotante.habitacao.tipo == 2):
                 self.__tela_adocao.mostra_mensagem('Cão grande demais para o apartamento')
-                return None 
+                return self.incluir_adocao() 
 
         dados_adocao = self.__tela_adocao.pega_dados_adocao()
         nova_adocao = Adocao(self.__contador_id, adotante, animal, dados_adocao['data'])
