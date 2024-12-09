@@ -1,30 +1,20 @@
 from datetime import date as Date
-# from enum import Enum
 
-# class Vacina(Enum):
-#     RAIVA = 'raiva',
-#     LEPTOSPIROSE = 'leptospirose',
-#     HEPATITE_INFECCIOSA = 'hepatite infecciosa'
 
 class Vacinacao:
-    # def __init__(self, data: Date, animal: Animal, vacina: str) -> None:
-    def __init__(self, data: Date, animal, vacina: int) -> None:
+    def __init__(self, data: Date, animal, vacina: str, contador_id: int):
         self.__data = None
         self.__animal = animal
         self.__vacina = None
+        self.__contador_id = contador_id
 
         ### Testando tipos das variáveis
         if isinstance(data, Date):
             self.__data = data
         else:
             print('Tipo inválido')
-        
-        # if isinstance(animal, Animal):
-        #     self.__animal = animal
-        # else:
-        #     print('Tipo inválido')
 
-        if isinstance(vacina, int):
+        if isinstance(vacina, str):
             self.__vacina = vacina
         else:
             print('Tipo inválido')
@@ -44,20 +34,21 @@ class Vacinacao:
     def animal(self):
         return self.__animal
     
-    # @animal.setter
-    # def animal(self, animal: Animal):
-    #     if isinstance(animal, Animal):
-    #         self.__animal = animal
-    #     else:
-    #         print('Valor inválido. O valor deve ser um Animal')
+    @animal.setter
+    def animal(self, animal):
+        self.__animal = animal
 
     @property
     def vacina(self):
         return self.__vacina
     
     @vacina.setter
-    def vacina(self, vacina: int):
-        if isinstance(vacina, int):
+    def vacina(self, vacina: str):
+        if isinstance(vacina, str):
             self.__vacina = vacina
         else:
-            print('Valor inválido. O valor deve ser um int')
+            print('Valor inválido. O valor deve ser um str')
+
+    @property
+    def contador_id(self):
+        return self.__contador_id

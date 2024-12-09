@@ -1,17 +1,37 @@
 from datetime import date as Date
+import PySimpleGUI as sg
 
 
 class TelaVacinacao:
+
+    def __init__(self) -> None:
+        self.__window = None
+
     def tela_opcoes(self):
-        print('\n-------- VACINAÇÃO ----------')
-        print('1 - Incluir Vacinação')
-        print('2 - Alterar Vacinação')
-        print('3 - Listar Vacinações')
-        print('4 - Excluir Vacinação')
-        print('0 - Retornar')
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [
+            [sg.Text('Vacinação',size=(20,1), font=titulo)],
+            [
+                sg.Button('Incluir', size=20, font=botao_font),
+                sg.Button('Alterar', size=20, font=botao_font),
+                sg.Button('Listar', size=20, font=botao_font),
+                sg.Button('Excluir', size=20, font=botao_font)
+            ],
+            [sg.Button('Retornar', size=20, font=botao_font)]
+        ]
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         
-        opcao = int(input('Escolha a opção: '))
-        return opcao
+        retorno, values = self.open()
+        dicionario = {
+            'Incluir' : 1,
+            'Alterar' : 2,
+            'Listar' : 3,
+            'Excluir' : 4,
+            'Retornar' : 0
+        }
+        self.close()
+        return dicionario[retorno]
     
     def pega_dados_vacinacao(self):
         print('\n-------- DADOS VACINAÇÃO ----------')
@@ -38,6 +58,32 @@ class TelaVacinacao:
     def seleciona_vacinacao(self):
         numero = int(input('\nNúmero da vacinação para selecionar: '))
         return numero
+
+    def ja_tem_animal(self):
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [
+            [sg.Text('Animal já cadastrado?',size=(20,1), font=titulo)],
+            [
+                sg.Button('Sim', size=20, font=botao_font),
+                sg.Button('Não', size=20, font=botao_font)
+            ]
+        ]
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
+        retorno, values = self.open()
+        dicionario = {
+            'Sim' : True,
+            'Não' : False
+        }
+        self.close()
+        return dicionario[retorno]
+
+    def mostra_mensagem(self, mensagem: str, titulo='Mensagem'):
+        sg.Popup(titulo, mensagem)
+
+    def open(self):
+        button, values = self.__window.Read()
+        return button, values
     
-    def mostra_mensagem(self, msg):
-        print(f'\n{msg}')
+    def close(self):
+        self.__window.Close()
