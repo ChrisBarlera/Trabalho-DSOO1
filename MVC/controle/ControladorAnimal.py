@@ -13,13 +13,15 @@ class ControladorAnimal:
         self.__tela_animal = TelaAnimal()
         self.__cachorro_DAO = CachorroDAO()
         self.__gato_DAO = GatoDAO()
+        
+    def init_DAO(self):
         try:
             self.__animais = list(self.__cachorro_DAO.get_all())
             for gato in list(self.__gato_DAO.get_all()):
                 self.__animais.append(gato)
         except:
             pass
-
+    
     def incluir_animal(self):
         opcao = self.__tela_animal.decide_tipo_animal()
         if opcao == 1:
@@ -77,6 +79,16 @@ class ControladorAnimal:
             return True
         else:
             return False
+
+    def update_vacinacao(self, vacinacao, animal):
+        if animal.especie == 'Cachorro':
+            self.__cachorro_DAO.remove(animal.numero_chip)
+            self.__cachorro_DAO.add(animal)
+        else:
+            self.__gato_DAO.remove(animal.numero_chip)
+            self.__gato_DAO.add(animal)
+        self.init_DAO()
+
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_animal,

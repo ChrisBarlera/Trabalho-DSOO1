@@ -84,7 +84,7 @@ class ControladorAdocao:
             novos_dados = self.__tela_adocao.pega_dados_adocao()
             adocao.data = novos_dados['data']
         else:
-            self.__tela_adocao.mostra_mensagem('Atenção: adoção não existente')
+            self.__tela_adocao.mostra_mensagem('ATENÇÃO: adoção não existente')
         self.lista_adocoes()
         return adocao
 
@@ -134,7 +134,6 @@ class ControladorAdocao:
                         3: self.lista_adocoes,
                         4: self.excluir_adocao,
                         0: self.retornar}
-
         while True:
             lista_opcoes[self.__tela_adocao.tela_opcoes()]()
     

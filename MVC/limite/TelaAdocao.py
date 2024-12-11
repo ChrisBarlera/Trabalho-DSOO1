@@ -75,14 +75,6 @@ class TelaAdocao:
     def ja_tem_adotante(self):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
-        # layout = [
-        #     [sg.Text('Adotante já cadastrado?',size=(20,1), font=titulo)],
-        #     [
-        #         sg.Button('Sim', size=20, font=botao_font),
-        #         sg.Button('Não', size=20, font=botao_font)
-        #     ],
-        #     [sg.Button('Retornar', size=20, font=botao_font)]
-        # ]
         layout = [
             [sg.Text('Adotante já cadastrado?',size=(20,1), font=titulo)],
             [
@@ -103,14 +95,6 @@ class TelaAdocao:
     def ja_tem_animal(self):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
-        # layout = [
-        #     [sg.Text('Animal já cadastrado?',size=(20,1), font=titulo)],
-        #     [
-        #         sg.Button('Sim', size=20, font=botao_font),
-        #         sg.Button('Não', size=20, font=botao_font)
-        #     ],
-        #     [sg.Button('Retornar', size=20, font=botao_font)]
-        # ]
         layout = [
             [sg.Text('Animal já cadastrado?',size=(20,1), font=titulo)],
             [

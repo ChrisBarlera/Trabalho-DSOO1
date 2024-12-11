@@ -64,8 +64,7 @@ class ControladorVacinacao:
             self.__vacinacao_DAO.remove(vacinacao.contador_id)
             self.__vacinacoes.remove(vacinacao)
         else:
-            self.__tela_vacinacao.mostra_mensagem('ATENÇÃO: vacinacao não existente')
-        # self.lista_vacinacoes()
+            self.__tela_vacinacao.mostra_mensagem('ATENÇÃO: vacinação não existente')
 
     def pega_vacinacao_por_numero(self, numero_vacinacao):
         for vacinacao in self.__vacinacoes:
