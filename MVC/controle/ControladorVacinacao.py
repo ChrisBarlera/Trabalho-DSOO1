@@ -20,10 +20,10 @@ class ControladorVacinacao:
     def incluir_vacinacao(self):
         if not self.ja_tem_animal():
             return
-        animal = self.__controlador_animal.seleciona_animal()
+        numero = self.__controlador_animal.lista_animais(seleciona=True)
+        animal = self.__controlador_animal.pega_animal_por_numero(numero)
         dados_vacinacao = self.__tela_vacinacao.pega_dados_vacinacao()
         nova_vacinacao = Vacinacao(dados_vacinacao['data'],
-                                   animal,
                                    dados_vacinacao['vacina'],
                                    self.__contador_id_vac)
         self.__contador_id_vac += 1

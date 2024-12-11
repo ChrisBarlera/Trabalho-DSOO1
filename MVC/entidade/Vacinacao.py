@@ -2,9 +2,8 @@ from datetime import date as Date
 
 
 class Vacinacao:
-    def __init__(self, data: Date, animal, vacina: str, contador_id: int):
+    def __init__(self, data: Date, vacina: str, contador_id: int):
         self.__data = None
-        self.__animal = animal
         self.__vacina = None
         self.__contador_id = contador_id
 
@@ -29,14 +28,6 @@ class Vacinacao:
             self.__data = data
         else:
             print('Valor inválido. O valor deve ser um Date')
-
-    @property
-    def animal(self):
-        return self.__animal
-    
-    @animal.setter
-    def animal(self, animal):
-        self.__animal = animal
 
     @property
     def vacina(self):

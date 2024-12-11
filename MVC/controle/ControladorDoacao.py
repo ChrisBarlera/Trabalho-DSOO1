@@ -1,6 +1,7 @@
 from limite.TelaDoacao import TelaDoacao
 from entidade.Doacao import Doacao
 from controle.ControladorDoador import ControladorDoador
+from DAOs.DoacaoDAO import DoacaoDAO
 
 
 class ControladorDoacao:
@@ -11,19 +12,26 @@ class ControladorDoacao:
         self.__doacoes = [] # type: ignore
         self.__tela_doacao = TelaDoacao()
         self.__contador_id = 1
+        self.__doacao_DAO = DoacaoDAO()
+        try:
+            self.__doacoes = list(self.__doacao_DAO.get_all())
+        except:
+            pass
 
     def incluir_doacao(self):
         adotante = None
         animal = None
         
         if self.ja_tem_doador():
-            doador = self.__controlador_doador.seleciona_doador()
+            cpf = self.__controlador_doador.lista_doadores(seleciona=True)
+            doador = self.__controlador_doador.pega_doador_por_cpf(cpf)
         else:
             self.__tela_doacao.mostra_mensagem('Cadastre um doador')
             doador = self.__controlador_doador.incluir_doador()
         
         if self.ja_tem_animal():
-            animal = self.__controlador_animal.seleciona_animal()
+            numero = self.__controlador_animal.lista_animais(seleciona=True)
+            animal = self.__controlador_animal.pega_animal_por_numero(numero)
         else:
             self.__tela_doacao.mostra_mensagem('Cadastre um animal')
             animal = self.__controlador_animal.incluir_animal()

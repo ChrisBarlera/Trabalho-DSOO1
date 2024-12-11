@@ -54,15 +54,11 @@ class ControladorAnimal:
         else:
             self.__controlador_cachorro.excluir_cachorro()
 
-    def seleciona_animal(self):
-        opcao = self.__tela_animal.decide_tipo_animal()
-        if opcao == 1:
-            numero = self.__controlador_gato.lista_gatos(seleciona=True)
-            animal = self.__controlador_gato.pega_gato_por_numero(numero)
-        else:
-            numero = self.__controlador_cachorro.lista_cachorros(seleciona=True)
-            animal = self.__controlador_cachorro.pega_cachorro_por_numero(numero)
-        return animal
+    def pega_animal_por_numero(self, numero_animal):
+        for animal in self.__animais:
+            if animal.numero_chip == numero_animal:
+                return animal
+        return None
 
     def mostra_animal_especifico(self, animal):
         dados = {'nome': animal.nome,

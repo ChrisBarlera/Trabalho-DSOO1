@@ -57,7 +57,7 @@ class TelaAnimal:
         botao_font = ('Helvetica', 20)
         layout = [[sg.Text('Animais cadastrados',size=(20,1), font=titulo)]]
         if selecionar:
-            for adotante in lista:
+            for animal in lista:
                 layout.append(self.mostra_animal(animal))
                 layout.append([sg.Button(f'Selecionar {animal['numero_chip']}')])
                 layout.append([sg.Text('-------------------------------------------')])

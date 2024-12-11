@@ -42,17 +42,19 @@ class ControladorAdocao:
         
         # REGRA DE VACINA DO ANIMAL NA ADOCAO
         if self.ja_tem_animal():
-            animal = self.__controlador_animal.seleciona_animal()
+            numero = self.__controlador_animal.lista_animais(seleciona=True)
+            animal = self.__controlador_animal.pega_animal_por_numero(numero)
             if not self.__controlador_animal.tem_todas_vacinas(animal):
                 self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
-                return self.incluir_adocao()
+                self.retornar()
+                return None
         else:
             ## se o animal não está cadastrado, ele certamente não está vacinado
             self.__tela_adocao.mostra_mensagem('Só podem ser adotados animais vacinados')
             return self.incluir_adocao()
         
         # REGRA DE CACHORRO GRANDE E AP PEQUENO
-        if animal.especie == 'CACHORRO':
+        if animal.especie == 'Cachorro':
             if (animal.tamanho == 3 and adotante.habitacao.tamanho == 1
                 and adotante.habitacao.tipo == 2):
                 self.__tela_adocao.mostra_mensagem('Cão grande demais para o apartamento')
@@ -82,7 +84,7 @@ class ControladorAdocao:
             novos_dados = self.__tela_adocao.pega_dados_adocao()
             adocao.data = novos_dados['data']
         else:
-            self.__tela_adocao.mostra_mensagem('ATENCAO: adoção não existente')
+            self.__tela_adocao.mostra_mensagem('Atenção: adoção não existente')
         self.lista_adocoes()
         return adocao
 
