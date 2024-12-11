@@ -1,5 +1,6 @@
 from limite.TelaAnimal import TelaAnimal
-
+from DAOs.CachorroDAO import CachorroDAO
+from DAOs.GatoDAO import GatoDAO
 
 class ControladorAnimal:
 
@@ -10,6 +11,14 @@ class ControladorAnimal:
         # self.__controlador_vacinacao = controlador_sistema.controlador_vacinacao
         self.__animais = [] # type: ignore # E se eu fizer uma matriz Nx2?
         self.__tela_animal = TelaAnimal()
+        self.__cachorro_DAO = CachorroDAO()
+        self.__gato_DAO = GatoDAO()
+        try:
+            self.__animais = list(self.__cachorro_DAO.get_all())
+            for gato in list(self.__gato_DAO.get_all()):
+                self.__animais.append(gato)
+        except:
+            pass
 
     def incluir_animal(self):
         opcao = self.__tela_animal.decide_tipo_animal()
@@ -27,13 +36,16 @@ class ControladorAnimal:
         else:
             self.__controlador_cachorro.alterar_cachorro()
 
-    def lista_animais(self):
-        opcao = self.__tela_animal.decide_tipo_animal()
-
-        if opcao == 1:
-            self.__controlador_gato.lista_gatos() # placeholder
-        elif opcao == 2:
-            self.__controlador_cachorro.lista_cachorros()
+    def lista_animais(self, seleciona=False):
+        lista_dados = []
+        for animal in self.__animais:
+            dados = {
+                'nome': animal.nome,
+                'numero_chip': animal.numero_chip,
+                'especie': animal.especie
+            }
+            lista_dados.append(dados)
+        return self.__tela_animal.mostra_todos_animais(lista_dados, seleciona)
 
     def excluir_animal(self):
         opcao = self.__tela_animal.decide_tipo_animal()

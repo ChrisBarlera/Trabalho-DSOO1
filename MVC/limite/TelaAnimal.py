@@ -52,23 +52,33 @@ class TelaAnimal:
         self.close()
         return dicionario[retorno]
 
-    def mostra_animal_especifico(self, dados_animal):
-        print('NOME DO ANIMAL:', dados_animal['nome'])
-        print('NÚMERO DO ANIMAL:', dados_animal['numero'])
-        print('ESPECIE DO ANIMAL:', dados_animal['especie'])
+    def mostra_todos_animais(self, lista, selecionar=False):
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [[sg.Text('Animais cadastrados',size=(20,1), font=titulo)]]
+        if selecionar:
+            for adotante in lista:
+                layout.append(self.mostra_animal(animal))
+                layout.append([sg.Button(f'Selecionar {animal['numero_chip']}')])
+                layout.append([sg.Text('-------------------------------------------')])
+        else:
+            for animal in lista:
+                layout.append(self.mostra_animal(animal))
+                layout.append([sg.Text('-------------------------------------------')])
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
+        retorno, values = self.open()
+        if selecionar:
+            retorno = int(retorno[11::])
+        self.close()
+        return retorno
 
-    def decide_mostra_tipo(self):
-        print('\n-------- TIPO ANIMAL ----------')
-        print('Temos as seguintes listas:')
-        print('1 - Gato')
-        print('2 - Cachorro')
-        print('3 - Todos')
-        opcao = int(input('Escolha a opção: '))
-        return opcao
-    
-    def seleciona_animal(self):
-        cpf = int(input('\nCPF do animal para selecionar: '))
-        return cpf
+    def mostra_animal(self, dados_animal):
+        animal_layout = [
+            [sg.Text(f'Nome: {dados_animal['nome']}')],
+            [sg.Text(f'Espécie: {dados_animal['especie']}')],
+            [sg.Text(f'Número: {dados_animal['numero_chip']}')]
+        ]
+        return animal_layout
 
     def mostra_mensagem(self, mensagem: str, titulo='Mensagem'):
         sg.Popup(titulo, mensagem)
