@@ -14,6 +14,9 @@ class CachorroDAO(DAO):
         if isinstance(key, int):
             return super().get(key)
 
+    def update(self, key, obj):
+        super().update(key, obj)
+
     def remove(self, key: int):
         if isinstance(key, int):
             return super().remove(key)

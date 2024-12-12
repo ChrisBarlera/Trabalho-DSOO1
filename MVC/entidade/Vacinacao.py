@@ -2,12 +2,17 @@ from datetime import date as Date
 
 
 class Vacinacao:
-    def __init__(self, data: Date, vacina: str, contador_id: int):
+    def __init__(self, codigo: int, data: Date, vacina: str):
+        self.__codigo = None
         self.__data = None
         self.__vacina = None
-        self.__contador_id = contador_id
 
         ### Testando tipos das variáveis
+        if isinstance(codigo, int):
+            self.__codigo = codigo
+        else:
+            print('Tipo inválido')
+
         if isinstance(data, Date):
             self.__data = data
         else:
@@ -41,5 +46,5 @@ class Vacinacao:
             print('Valor inválido. O valor deve ser um str')
 
     @property
-    def contador_id(self):
-        return self.__contador_id
+    def codigo(self):
+        return self.__codigo

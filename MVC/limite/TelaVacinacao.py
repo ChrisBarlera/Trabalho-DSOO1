@@ -38,6 +38,8 @@ class TelaVacinacao:
         botao_font = ('Helvetica', 20)
         layout = [
             [sg.Text('Insira os dados',size=(20,1), font=titulo)],
+            [sg.Text('Código da vacinação', size=20, font=botao_font),
+             sg.Input('Ex.: 123', size=20, font=('Helvetica', 15), key='codigo')],
             [sg.Text('Data de vacina (Formato dd/mm/yyyy)', size=20, font=botao_font),
              sg.Input('Ex.: 13/12/2024', size=20, font=('Helvetica', 15), key='data')],
             [sg.Text('Vacina', size=20, font=botao_font), sg.Combo((
@@ -50,6 +52,7 @@ class TelaVacinacao:
         self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         button, values = self.open()
         try:
+            values['codigo'] = int(values['codigo'])
             raw_data = values['data'].split('/')
             data_dict = {'day': int(raw_data[0]),
                      'month': int(raw_data[1]),
@@ -64,22 +67,30 @@ class TelaVacinacao:
         self.close()
         return values
 
-    def mostra_todas_vacinacoes(self, lista):
+    def mostra_todas_vacinacoes(self, lista, selecionar=False):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
-        layout = [[sg.Text('Vacinacoes cadastrados',size=(20,1), font=titulo)]]
+        layout = [[sg.Text('Vacinações cadastrados',size=(20,1), font=titulo)]]
 
-        for vacinacao in lista:
-            layout.append(self.mostra_vacinacao(vacinacao))
-            layout.append([sg.Text('-------------------------------------------')])
+        if selecionar:
+            for vacinacao in lista:
+                layout.append(self.mostra_vacinacao(vacinacao))
+                layout.append([sg.Button(f'Selecionar {vacinacao['codigo']}')])
+                layout.append([sg.Text('-------------------------------------------')])
+        else:
+            for vacinacao in lista:
+                layout.append(self.mostra_vacinacao(vacinacao))
+                layout.append([sg.Text('-------------------------------------------')])
         self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         retorno, values = self.open()
+        if selecionar:
+            retorno = int(retorno[11::])
         self.close()
         return retorno
     
     def mostra_vacinacao(self, dados_vacinacao):
         vac_layout = [
-            [sg.Text(f'Número: {dados_vacinacao['contador_id']}')],
+            [sg.Text(f'Número: {dados_vacinacao['codigo']}')],
             [sg.Text(f'Vacina: {dados_vacinacao['vacina']}')],
             [sg.Text(f'Data: {dados_vacinacao['data']}')],
             [sg.Text(f'Animal: {dados_vacinacao['nome_animal']}')]

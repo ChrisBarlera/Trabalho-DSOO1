@@ -81,13 +81,11 @@ class ControladorAnimal:
         else:
             return False
 
-    def update_vacinacao(self, vacinacao, animal):
+    def update_vacinacao(self, animal):
         if animal.especie == 'Cachorro':
-            self.__cachorro_DAO.remove(animal.numero_chip)
-            self.__cachorro_DAO.add(animal)
+            self.__cachorro_DAO.update(animal.numero_chip, animal)
         else:
-            self.__gato_DAO.remove(animal.numero_chip)
-            self.__gato_DAO.add(animal)
+            self.__gato_DAO.update(animal.codigo,animal)
         self.init_DAO()
 
     def abre_tela(self):

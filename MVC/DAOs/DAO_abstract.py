@@ -27,6 +27,14 @@ class DAO(ABC):
         except KeyError:
             pass
 
+    def update(self, key, obj):
+        try:
+            if(self.__cache[key] != None):
+                self.__cache[key] = obj
+                self.__dump()
+        except KeyError:
+            pass 
+
     def remove(self, key):
         try:
             self.__cache.pop(key)

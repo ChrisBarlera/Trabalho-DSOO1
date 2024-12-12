@@ -10,8 +10,10 @@ class ControladorVacinacao:
         self.__controlador_animal = controlador_sistema.controlador_animal
         self.__vacinacoes = [] # type: ignore
         self.__tela_vacinacao = TelaVacinacao()
-        self.__contador_id_vac = 1
         self.__vacinacao_DAO = VacinacaoDAO()
+        self.init_DAO()
+
+    def init_DAO(self):
         try:
             self.__vacinacoes = list(self.__vacinacao_DAO.get_all())
         except:
@@ -23,55 +25,44 @@ class ControladorVacinacao:
         numero = self.__controlador_animal.lista_animais(seleciona=True)
         animal = self.__controlador_animal.pega_animal_por_numero(numero)
         dados_vacinacao = self.__tela_vacinacao.pega_dados_vacinacao()
-        nova_vacinacao = Vacinacao(dados_vacinacao['data'],
-                                   dados_vacinacao['vacina'],
-                                   self.__contador_id_vac)
-        self.__contador_id_vac += 1
+        nova_vacinacao = Vacinacao(dados_vacinacao['codigo'],
+                                   dados_vacinacao['data'],
+                                   dados_vacinacao['vacina'])
         self.__vacinacoes.append(nova_vacinacao)
         animal.vacinacoes.append(nova_vacinacao)
         self.__vacinacao_DAO.add(nova_vacinacao)
-        self.__controlador_animal.update_vacinacao(nova_vacinacao,animal)
+        self.__controlador_animal.update_vacinacao(animal)
         return nova_vacinacao
     
     def alterar_vacinacao(self):
         pass
-        # numero_animal = self.__controlador_animal.lista_animais(seleciona=True)
-        # animal = self.__controlador_animal.pega_animal_por_numero(numero_animal)
 
-        # if animal is not None:
-        #     novos_dados = self.__tela_vacinacao.pega_dados_vacinacao()
-        #     vacinacao.numero = novos_dados['numero']
-        #     vacinacao.tipo = novos_dados['tipo']
-        #     vacinacao.tamanho = novos_dados['tamanho']
-        # else:
-        #     self.__tela_vacinacao.mostra_mensagem('ATENÇÃO: vacinação não existente')
-        # self.lista_vacinacoes()
-
-    def lista_vacinacoes(self):
+    def lista_vacinacoes(self, selecionar=False):
         numero = self.__controlador_animal.lista_animais(True)
         animal = self.__controlador_animal.pega_animal_por_numero(numero)
         lista_dados = []
         for vacinacao in animal.vacinacoes:
-            dados = {'contador_id': vacinacao.contador_id,
+            dados = {'codigo': vacinacao.codigo,
                      'data': vacinacao.data,
                      'nome_animal': animal.nome,
                      'vacina': vacinacao.vacina}
             lista_dados.append(dados)
-        return self.__tela_vacinacao.mostra_todas_vacinacoes(lista_dados)
+        return self.__tela_vacinacao.mostra_todas_vacinacoes(
+            lista_dados,
+            selecionar
+        ), animal
 
     def excluir_vacinacao(self):
-        contador_id = self.lista_vacinacoes(seleciona=True)
-        vacinacao = self.pega_vacinacao_por_numero(contador_id)
+        codigo, animal = self.lista_vacinacoes(selecionar=True)
+        vacinacao = self.pega_vacinacao_por_codigo(codigo)
+        self.__vacinacao_DAO.remove(vacinacao.codigo)
+        self.__vacinacoes.remove(vacinacao)
+        self.__controlador_animal.update_vacinacao(animal)
+        return vacinacao
 
-        if vacinacao is not None:
-            self.__vacinacao_DAO.remove(vacinacao.contador_id)
-            self.__vacinacoes.remove(vacinacao)
-        else:
-            self.__tela_vacinacao.mostra_mensagem('ATENÇÃO: vacinação não existente')
-
-    def pega_vacinacao_por_numero(self, numero_vacinacao):
+    def pega_vacinacao_por_codigo(self, codigo_vacinacao):
         for vacinacao in self.__vacinacoes:
-            if vacinacao.contador_id == numero_vacinacao:
+            if vacinacao.codigo == codigo_vacinacao:
                 return vacinacao
         return None
 
