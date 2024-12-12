@@ -32,6 +32,12 @@ class Animal(ABC):
     def especie(self):
         pass
 
+    def remover_vacina_por_codigo(self, codigo):
+        for vacina in self.__vacinacoes:
+            if vacina.codigo == codigo:
+                self.__vacinacoes.remove(vacina)
+                break
+
     @property
     def numero_chip(self):
         return self.__numero_chip
