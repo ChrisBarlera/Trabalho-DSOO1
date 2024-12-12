@@ -14,7 +14,7 @@ class TelaVacinacao:
             [sg.Text('Vacinação',size=(20,1), font=titulo)],
             [
                 sg.Button('Incluir', size=20, font=botao_font),
-                sg.Button('Alterar', size=20, font=botao_font),
+                # sg.Button('Alterar', size=20, font=botao_font),
                 sg.Button('Listar', size=20, font=botao_font),
                 sg.Button('Excluir', size=20, font=botao_font)
             ],

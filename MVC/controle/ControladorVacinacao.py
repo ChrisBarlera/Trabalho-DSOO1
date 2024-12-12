@@ -34,8 +34,8 @@ class ControladorVacinacao:
         self.__controlador_animal.update_vacinacao(animal)
         return nova_vacinacao
     
-    def alterar_vacinacao(self):
-        pass
+    # def alterar_vacinacao(self):
+    #     pass
 
     def lista_vacinacoes(self, selecionar=False):
         numero = self.__controlador_animal.lista_animais(True)
@@ -73,7 +73,7 @@ class ControladorVacinacao:
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_vacinacao,
-                        2: self.alterar_vacinacao,
+                        # 2: self.alterar_vacinacao,
                         3: self.lista_vacinacoes,
                         4: self.excluir_vacinacao,
                         0: self.retornar}
