@@ -57,7 +57,9 @@ class ControladorVacinacao:
         vacinacao = self.pega_vacinacao_por_codigo(codigo)
         self.__vacinacao_DAO.remove(vacinacao.codigo)
         self.__vacinacoes.remove(vacinacao)
+        animal.vacinacoes.remove(vacinacao)
         self.__controlador_animal.update_vacinacao(animal)
+        self.init_DAO()
         return vacinacao
 
     def pega_vacinacao_por_codigo(self, codigo_vacinacao):
