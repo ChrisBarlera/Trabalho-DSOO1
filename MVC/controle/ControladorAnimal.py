@@ -13,6 +13,7 @@ class ControladorAnimal:
         self.__tela_animal = TelaAnimal()
         self.__cachorro_DAO = CachorroDAO()
         self.__gato_DAO = GatoDAO()
+        self.init_DAO()
         
     def init_DAO(self):
         try:
@@ -88,7 +89,6 @@ class ControladorAnimal:
             self.__gato_DAO.remove(animal.numero_chip)
             self.__gato_DAO.add(animal)
         self.init_DAO()
-
 
     def abre_tela(self):
         lista_opcoes = {1: self.incluir_animal,

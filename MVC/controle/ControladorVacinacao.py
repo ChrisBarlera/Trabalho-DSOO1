@@ -30,6 +30,7 @@ class ControladorVacinacao:
         self.__vacinacoes.append(nova_vacinacao)
         animal.vacinacoes.append(nova_vacinacao)
         self.__vacinacao_DAO.add(nova_vacinacao)
+        self.__controlador_animal.update_vacinacao(nova_vacinacao,animal)
         return nova_vacinacao
     
     def alterar_vacinacao(self):
@@ -46,15 +47,17 @@ class ControladorVacinacao:
         #     self.__tela_vacinacao.mostra_mensagem('ATENÇÃO: vacinação não existente')
         # self.lista_vacinacoes()
 
-    def lista_vacinacoes(self, seleciona=False):
+    def lista_vacinacoes(self):
+        numero = self.__controlador_animal.lista_animais(True)
+        animal = self.__controlador_animal.pega_animal_por_numero(numero)
         lista_dados = []
-        for vacinacao in self.__vacinacoes:
+        for vacinacao in animal.vacinacoes:
             dados = {'contador_id': vacinacao.contador_id,
                      'data': vacinacao.data,
-                     'vacina': vacinacao.vacina,
-                     'nome_animal': vacinacao.animal.nome}
+                     'nome_animal': animal.nome,
+                     'vacina': vacinacao.vacina}
             lista_dados.append(dados)
-        return self.__tela_vacinacao.mostra_todas_vacinacoes(lista_dados, seleciona)
+        return self.__tela_vacinacao.mostra_todas_vacinacoes(lista_dados)
 
     def excluir_vacinacao(self):
         contador_id = self.lista_vacinacoes(seleciona=True)

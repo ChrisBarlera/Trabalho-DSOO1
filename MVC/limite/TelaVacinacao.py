@@ -64,23 +64,16 @@ class TelaVacinacao:
         self.close()
         return values
 
-    def mostra_todas_vacinacoes(self, lista, selecionar=False):
+    def mostra_todas_vacinacoes(self, lista):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
         layout = [[sg.Text('Vacinacoes cadastrados',size=(20,1), font=titulo)]]
-        if selecionar:
-            for vacinacao in lista:
-                layout.append(self.mostra_vacinacao(vacinacao))
-                layout.append([sg.Button(f'Selecionar {vacinacao['contador_id']}')])
-                layout.append([sg.Text('-------------------------------------------')])
-        else:
-            for vacinacao in lista:
-                layout.append(self.mostra_vacinacao(vacinacao))
-                layout.append([sg.Text('-------------------------------------------')])
+
+        for vacinacao in lista:
+            layout.append(self.mostra_vacinacao(vacinacao))
+            layout.append([sg.Text('-------------------------------------------')])
         self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
         retorno, values = self.open()
-        if selecionar:
-            retorno = int(retorno[11::])
         self.close()
         return retorno
     
