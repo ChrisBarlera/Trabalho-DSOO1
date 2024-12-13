@@ -64,6 +64,7 @@ class ControladorAnimal:
             self.__controlador_gato.excluir_gato()
         else:
             self.__controlador_cachorro.excluir_cachorro()
+        self.init_DAO()
 
     def pega_animal_por_numero(self, numero_animal):
         for animal in self.__animais:

@@ -58,8 +58,8 @@ class ControladorAdocao:
         
         # REGRA DE CACHORRO GRANDE E AP PEQUENO
         if animal.especie == 'Cachorro':
-            if (animal.tamanho == 3 and adotante.habitacao.tamanho == 1
-                and adotante.habitacao.tipo == 2):
+            if (animal.tamanho == 'Grande' and adotante.habitacao.tamanho == 'Pequeno'
+                and adotante.habitacao.tipo == 'Apartamento'):
                 self.__tela_adocao.mostra_mensagem('Cão grande demais para o apartamento')
                 return self.incluir_adocao() 
 
