@@ -17,6 +17,7 @@ class ControladorAdocao:
             self.__adocoes = list(self.__adocao_DAO.get_all())
         except:
             pass
+
     def incluir_adocao(self):
         adotante = None
         animal = None
@@ -101,15 +102,10 @@ class ControladorAdocao:
         return self.__tela_adocao.mostra_todas_adocoes(lista_dados, seleciona)
 
     def excluir_adocao(self):
-        self.lista_adocoes()
-        numero_adocao = self.__tela_adocao.seleciona_adocao()
+        numero_adocao = self.lista_adocoes(seleciona=True)
         adocao = self.pega_adocao_por_numero(numero_adocao)
-
-        if adocao is not None:
-            self.__adocoes.remove(adocao)
-        else:
-            self.__tela_adocao.mostra_mensagem('ATENCAO: adoção não existente')
-        
+        self.__adocoes.remove(adocao)
+        self.__adocao_DAO.remove(numero_adocao)
         self.lista_adocoes()
 
     def pega_adocao_por_numero(self, numero_id):
