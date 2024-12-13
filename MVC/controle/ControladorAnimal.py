@@ -42,11 +42,19 @@ class ControladorAnimal:
     def lista_animais(self, seleciona=False):
         lista_dados = []
         for animal in self.__animais:
-            dados = {
-                'nome': animal.nome,
-                'numero_chip': animal.numero_chip,
-                'especie': animal.especie
-            }
+            try:
+                dados = {
+                    'nome': animal.nome,
+                    'numero_chip': animal.numero_chip,
+                    'especie': animal.especie,
+                    'tamanho': animal.tamanho
+                }
+            except:
+                dados = {
+                    'nome': animal.nome,
+                    'numero_chip': animal.numero_chip,
+                    'especie': animal.especie
+                }
             lista_dados.append(dados)
         return self.__tela_animal.mostra_todos_animais(lista_dados, seleciona)
 

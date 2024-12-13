@@ -73,11 +73,19 @@ class TelaAnimal:
         return retorno
 
     def mostra_animal(self, dados_animal):
-        animal_layout = [
-            [sg.Text(f'Nome: {dados_animal['nome']}')],
-            [sg.Text(f'Espécie: {dados_animal['especie']}')],
-            [sg.Text(f'Número: {dados_animal['numero_chip']}')]
-        ]
+        try:
+            animal_layout = [
+                [sg.Text(f'Nome: {dados_animal['nome']}')],
+                [sg.Text(f'Espécie: {dados_animal['especie']}')],
+                [sg.Text(f'Tamanho: {dados_animal['tamanho']}')],
+                [sg.Text(f'Número: {dados_animal['numero_chip']}')]
+            ]
+        except:  
+            animal_layout = [
+                [sg.Text(f'Nome: {dados_animal['nome']}')],
+                [sg.Text(f'Espécie: {dados_animal['especie']}')],
+                [sg.Text(f'Número: {dados_animal['numero_chip']}')]
+            ]
         return animal_layout
 
     def mostra_mensagem(self, mensagem: str, titulo='Mensagem'):
