@@ -13,8 +13,10 @@ class ControladorAdocao:
         self.__adocoes = [] # type: ignore
         self.__tela_adocao = TelaAdocao()
         self.__adocao_DAO = AdocaoDAO()
-        self.__contador_id = 1
-
+        try:
+            self.__adocoes = list(self.__adocao_DAO.get_all())
+        except:
+            pass
     def incluir_adocao(self):
         adotante = None
         animal = None
@@ -61,9 +63,9 @@ class ControladorAdocao:
                 return self.incluir_adocao() 
 
         dados_adocao = self.__tela_adocao.pega_dados_adocao()
-        nova_adocao = Adocao(self.__contador_id, adotante, animal, dados_adocao['data'])
-        self.__contador_id += 1
+        nova_adocao = Adocao(dados_adocao['numero_id'], adotante, animal, dados_adocao['data'])
         self.__adocoes.append(nova_adocao)
+        self.__adocao_DAO.add(nova_adocao)
         return nova_adocao
     
     def alterar_adocao(self):
@@ -88,15 +90,15 @@ class ControladorAdocao:
         self.lista_adocoes()
         return adocao
 
-    def lista_adocoes(self):
+    def lista_adocoes(self, seleciona=False):
+        lista_dados = []
         for adocao in self.__adocoes:
             dados = {'numero_id': adocao.numero_id,
                      'data': adocao.data,
-                     'animal': adocao.animal,
-                     'adotante': adocao.adotante}
-            self.__tela_adocao.mostra_adocao(dados)
-            self.__controlador_animal.mostra_animal_especifico(dados['animal'])
-            self.__controlador_adotante.mostra_adotante_especifico(dados['adotante'])
+                     'nome_animal': adocao.animal.nome,
+                     'nome_adotante': adocao.adotante.nome}
+            lista_dados.append(dados)
+        return self.__tela_adocao.mostra_todas_adocoes(lista_dados, seleciona)
 
     def excluir_adocao(self):
         self.lista_adocoes()

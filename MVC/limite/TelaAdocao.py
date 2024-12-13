@@ -53,24 +53,40 @@ class TelaAdocao:
         return retorno
 
     def pega_dados_adocao(self):
-        print('\n-------- DADOS ADOÇÃO ----------')
-        raw_data_nasc = input('Data da Adoção (Formato dd/mm/yyyy): ').split('/')
-        data_dict = {'day': int(raw_data_nasc[0]),
-                     'month': int(raw_data_nasc[1]),
-                     'year': int(raw_data_nasc[2])}
-        data = Date(**data_dict)
-        return {'data': data}
+        titulo = ('Helvetica', 30)
+        botao_font = ('Helvetica', 20)
+        layout = [
+            [sg.Text('Insira os dados',size=(20,1), font=titulo)],
+            [sg.Text('ID da adoção', size=20, font=botao_font),
+             sg.Input('Ex.: 123', size=20, font=('Helvetica', 15), key='numero_id')],
+            [sg.Text('Data de adoção (Formato dd/mm/yyyy)', size=20, font=botao_font),
+             sg.Input('Ex.: 13/12/2024', size=20, font=('Helvetica', 15), key='data')],
+            [sg.Ok(size=20, font=botao_font)]
+        ]
+        self.__window = sg.Window('Sistema da ONG', default_element_size=(200,1)).Layout(layout)
+        button, values = self.open()
+        try:
+            values['numero_id'] = int(values['numero_id'])
+            raw_data = values['data'].split('/')
+            data_dict = {'day': int(raw_data[0]),
+                     'month': int(raw_data[1]),
+                     'year': int(raw_data[2])}
+            values['data'] = Date(**data_dict)
+        except:
+            self.mostra_mensagem('Preenchimento inválido dos dados!')
+            self.close()
+            self.pega_dados_adocao()
+        self.close()
+        return values
     
     def mostra_adocao(self, dados_adocao):
         adocao_layout = [
             [sg.Text(f'ID da adoção: {dados_adocao['numero_id']}')],
-            [sg.Text(f'Data: {dados_adocao['data']}')]
+            [sg.Text(f'Data: {dados_adocao['data']}')],
+            [sg.Text(f'Animal: {dados_adocao['nome_animal']}')],
+            [sg.Text(f'Adotante: {dados_adocao['nome_adotante']}')]
         ]
         return adocao_layout
-
-    def seleciona_adocao(self):
-        numero = int(input('\nID da adoção que deseja selecionar: '))
-        return numero
 
     def ja_tem_adotante(self):
         titulo = ('Helvetica', 30)
@@ -115,14 +131,6 @@ class TelaAdocao:
     def tbm_trocar_adotante(self):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
-        # layout = [
-        #     [sg.Text('Também alterar adotante?',size=(20,1), font=titulo)],
-        #     [
-        #         sg.Button('Sim', size=20, font=botao_font),
-        #         sg.Button('Não', size=20, font=botao_font)
-        #     ],
-        #     [sg.Button('Retornar', size=20, font=botao_font)]
-        # ]
         layout = [
             [sg.Text('Também alterar adotante?',size=(20,1), font=titulo)],
             [
@@ -143,14 +151,6 @@ class TelaAdocao:
     def tbm_trocar_animal(self):
         titulo = ('Helvetica', 30)
         botao_font = ('Helvetica', 20)
-        # layout = [
-        #     [sg.Text('Também alterar animal?',size=(20,1), font=titulo)],
-        #     [
-        #         sg.Button('Sim', size=20, font=botao_font),
-        #         sg.Button('Não', size=20, font=botao_font)
-        #     ],
-        #     [sg.Button('Retornar', size=20, font=botao_font)]
-        # ]
         layout = [
             [sg.Text('Também alterar animal?',size=(20,1), font=titulo)],
             [
