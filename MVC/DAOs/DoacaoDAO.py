@@ -5,10 +5,10 @@ class DoacaoDAO(DAO):
     def __init__(self):
         super().__init__('doacao.pkl')
 
-    def add(self, daocao: Doacao):
-        if (isinstance(daocao.numero_id, int)) and (daocao is not None) \
-            and (isinstance(daocao, daocao)):
-            super().add(daocao.numero_id, daocao)
+    def add(self, doacao: Doacao):
+        if (isinstance(doacao.numero_id, int)) and (doacao is not None) \
+            and (isinstance(doacao, Doacao)):
+            super().add(doacao.numero_id, doacao)
 
     def get(self, key: int):
         if isinstance(key, int):

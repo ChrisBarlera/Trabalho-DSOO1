@@ -37,54 +37,50 @@ class ControladorDoacao:
             animal = self.__controlador_animal.incluir_animal()
         
         dados_doacao = self.__tela_doacao.pega_dados_doacao()
-        nova_doacao = Doacao(self.__contador_id, doador, animal,
+        nova_doacao = Doacao(dados_doacao['numero_id'], doador, animal,
                              dados_doacao['data'], dados_doacao['motivo'])
-        self.__contador_id += 1
         self.__doacoes.append(nova_doacao)
+        self.__doacao_DAO.add(nova_doacao)
         return nova_doacao
     
     def alterar_doacao(self):
-        self.lista_doacoes()
-        numero_doacao = self.__tela_doacao.seleciona_doacao()
-        doacao = self.pega_doacao_por_numero(numero_doacao)
+        pass
+        # self.lista_doacoes()
+        # numero_doacao = self.__tela_doacao.seleciona_doacao()
+        # doacao = self.pega_doacao_por_numero(numero_doacao)
 
-        if doacao is not None:
-            if self.tbm_trocar_doador():
-                self.__tela_doacao.mostra_mensagem('Cadastre o doador')
-                novo_doador = self.__controlador_doador.incluir_doador()
-                doacao.doador = novo_doador
+        # if doacao is not None:
+        #     if self.tbm_trocar_doador():
+        #         self.__tela_doacao.mostra_mensagem('Cadastre o doador')
+        #         novo_doador = self.__controlador_doador.incluir_doador()
+        #         doacao.doador = novo_doador
 
-            if self.tbm_trocar_animal():
-                self.__tela_doacao.mostra_mensagem('Cadastre o animal')
-                novo_animal = self.__controlador_animal.incluir_animal()
-                doacao.animal = novo_animal
-            novos_dados = self.__tela_doacao.pega_dados_doacao()
-            doacao.data = novos_dados['data']
-        else:
-            self.__tela_doacao.mostra_mensagem('ATENCAO: adoção não existente')
-        self.lista_doacoes()
-        return doacao
+        #     if self.tbm_trocar_animal():
+        #         self.__tela_doacao.mostra_mensagem('Cadastre o animal')
+        #         novo_animal = self.__controlador_animal.incluir_animal()
+        #         doacao.animal = novo_animal
+        #     novos_dados = self.__tela_doacao.pega_dados_doacao()
+        #     doacao.data = novos_dados['data']
+        # else:
+        #     self.__tela_doacao.mostra_mensagem('ATENCAO: adoção não existente')
+        # self.lista_doacoes()
+        # return doacao
 
-    def lista_doacoes(self):
+    def lista_doacoes(self, seleciona=False):
+        lista_dados = []
         for doacao in self.__doacoes:
             dados = {'numero_id': doacao.numero_id,
                      'data': doacao.data,
-                     'animal': doacao.animal,
-                     'doador': doacao.doador}
-            self.__tela_doacao.mostra_doacao(dados)
-            self.__controlador_animal.mostra_animal_especifico(dados['animal'])
-            self.__controlador_doador.mostra_doador_especifico(dados['doador'])
+                     'nome_animal': doacao.animal.nome,
+                     'nome_doador': doacao.doador.nome}
+            lista_dados.append(dados)
+        return self.__tela_doacao.mostra_todas_doacoes(lista_dados, seleciona)
 
     def excluir_doacao(self):
-        self.lista_doacoes()
-        numero_doacao = self.__tela_doacao.seleciona_doacao()
+        numero_doacao = self.lista_doacoes(seleciona=True)
         doacao = self.pega_doacao_por_numero(numero_doacao)
-
-        if doacao is not None:
-            self.__doacoes.remove(doacao)
-        else:
-            self.__tela_doacao.mostra_mensagem('ATENCAO: doação não existente')
-        
+        self.__adocoes.remove(doacao)
+        self.__doacao_DAO.remove(numero_doacao)
         self.lista_doacoes()
 
     def pega_doacao_por_numero(self, numero_id):
